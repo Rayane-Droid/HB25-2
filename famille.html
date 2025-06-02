@@ -238,6 +238,10 @@
         alert("Les commentaires ne doivent pas dépasser 300 caractères...");
         return;
       }
+      // Amiri 
+doc.addFont('Amiri-Regular.ttf', 'Amiri', 'normal');
+doc.setFont('Amiri');
+
       const {
         jsPDF
       } = window.jspdf;
@@ -376,13 +380,16 @@ document.body.appendChild(titleElement);
 
   // Avant d’écrire un texte, vérifie s'il contient de l'arabe
 function setFontAccordingToText(doc, text) {
-  if (isArabic(text)) {
-    doc.setFont("Amiri", "bold");  // Police arabe
-  } else {
-    doc.setFont("helvetica", "normal"); // Police latine classique
-  }
+if (isArabic(t.summaryTitle)) {
+  doc.text(t.summaryTitle, 200, 15, { align: 'right' });
+} else {
+  doc.text(t.summaryTitle, 105, 15, null, null, 'center');
 }
 
+}
+
+
+    
 // ========================================================= Application automatique à tous les éléments existants
 document.querySelectorAll('div, p, span').forEach(el => {
   applyArabicStyleTo(el);
