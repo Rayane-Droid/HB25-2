@@ -17,11 +17,11 @@
 
   <link rel="preload" href="Amiri-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <script src="amiri-font.js"></script>
-    
 </head>
 
 <style>
- </style>
+</style>
+  
 <body>
   <div id="language-selection">
     <h2 id="language-prompt">
@@ -87,12 +87,11 @@
     <br />
     <button class="btn" onclick="saveToPDF()" id="btn-save">Enregistrer en PDF</button>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
-  <script>
+  // ================================== script 
+    <script>
       // ================================== dictionnaire   
    
-     // ================================== 
+     // ================================== selectionner la langue
     function selectLanguage() {
       const lang = document.getElementById("language").value;
       if (!lang) return;
@@ -303,11 +302,7 @@ else if (cells[6].innerText.trim()) choix = cells[6].innerText.trim();
           left: 14,
           right: 14
         },
-        
-        
-        
-        
-        
+
         columnStyles: {
       0: { cellWidth: 25 },
       1: { cellWidth: 25 },
@@ -315,9 +310,6 @@ else if (cells[6].innerText.trim()) choix = cells[6].innerText.trim();
       3: { cellWidth: 45 },
       4: { cellWidth: 25 }
     }
-        
-        
-        
       });
       const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
       // ================================== Ajout des commentaires au PDF
