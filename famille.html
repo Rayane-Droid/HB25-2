@@ -337,11 +337,7 @@ writeTextAutoLang(doc, t.photoText || "Commentaires:", 200, commentsTitleYPositi
 
 const commentsYPosition = commentsTitleYPosition + 7;
 writeTextAutoLang(doc, commentaires, 200, commentsYPosition);
-      
-      
-      } else {
-        doc.text(commentaires, 14, commentsYPosition);
-      }
+
 // ================== Texte procédure d'achat traduit
       const splitText = doc.splitTextToSize(t.purchaseProcedure, 180);
       doc.setFontSize(11);
