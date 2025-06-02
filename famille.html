@@ -262,9 +262,16 @@
       doc.setFontSize(11);
     //  doc.setFont("helvetica", "normal");
       doc.setFont("Amiri", "bold");
-      doc.text(` ${t.dateLabel} ${dateStr}`, 14, 30);
-      doc.text(` ${t.nameLabel} ${nomUtilisateur}`, 14, 38);
-      doc.text(` ${t.phoneLabel} ${telephoneUtilisateur}`, 14, 46);
+   //   doc.text(` ${t.dateLabel} ${dateStr}`, 14, 30);
+//      doc.text(` ${t.nameLabel} ${nomUtilisateur}`, 14, 38);
+ //     doc.text(` ${t.phoneLabel} ${telephoneUtilisateur}`, 14, 46);
+    
+      writeTextAutoLang(doc, `${t.dateLabel} ${dateStr}`, 200, 30);
+writeTextAutoLang(doc, `${t.nameLabel} ${nomUtilisateur}`, 200, 38);
+writeTextAutoLang(doc, `${t.phoneLabel} ${telephoneUtilisateur}`, 200, 46);
+      
+      
+      
       // ================================== Préparer les données du tableau
       const bodyData = [];
       rows.forEach((row) => {
@@ -317,7 +324,15 @@ const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
       doc.setFont("Amiri", "bold");
 // ===================== Titre des commentaires
       const commentsTitleYPosition = lastY - 3; // Position pour le titre
-      doc.text("Commentaires:", 14, commentsTitleYPosition);
+ //     doc.text("Commentaires:", 14, commentsTitleYPosition);
+
+
+writeTextAutoLang(doc, t.photoText || "Commentaires:", 200, commentsTitleYPosition);
+//writeTextAutoLang(doc, commentaires, 200, commentsYPosition);
+
+
+
+
       
 // ================= Position pour les commentaires
       const commentsYPosition = commentsTitleYPosition + 7; // Position pour les commentaires
@@ -328,7 +343,12 @@ const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
       if (textWidth + marginRight > pageWidth) {
         // Si le texte dépasse, utilisez splitTextToSize pour gérer le débordement
         const splitComments = doc.splitTextToSize(commentaires, pageWidth - 39); // 14px de chaque côté pour les marges
-        doc.text(splitComments, 14, commentsYPosition);
+  //      doc.text(splitComments, 14, commentsYPosition);
+     
+  //    writeTextAutoLang(doc, t.photoText || "Commentaires:", 200, commentsTitleYPosition);
+writeTextAutoLang(doc, commentaires, 200, commentsYPosition);
+
+      
       } else {
         doc.text(commentaires, 14, commentsYPosition);
       }
