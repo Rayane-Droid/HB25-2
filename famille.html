@@ -85,8 +85,7 @@
     <br />
     <button class="btn" onclick="saveToPDF()" id="btn-save">Enregistrer en PDF</button>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  
   <script>
     let currentLanguage = '';
     // ================================== 
@@ -220,6 +219,23 @@
         tbody.appendChild(row);
       });
     }
+
+
+
+    //
+function writeTextAutoLang(doc, text, x, y, maxWidth = 180) {
+  if (isArabic(text)) {
+    doc.setFont("Amiri", "bold");
+    const splitText = doc.splitTextToSize(text, maxWidth);
+    doc.text(splitText, x, y, { align: "right" });
+  } else {
+    doc.setFont("helvetica", "normal");
+    const splitText = doc.splitTextToSize(text, maxWidth);
+    doc.text(splitText, x, y);
+  }
+}
+
+//
     // ==================== saveToPDF 
     function saveToPDF() {
       const t = translations[currentLanguage];
@@ -382,20 +398,7 @@ function applyArabicStyleTo(element) {
     element.classList.add("texte-arabe");
   }
 }
-//
-function writeTextAutoLang(doc, text, x, y, maxWidth = 180) {
-  if (isArabic(text)) {
-    doc.setFont("Amiri", "bold");
-    const splitText = doc.splitTextToSize(text, maxWidth);
-    doc.text(splitText, x, y, { align: "right" });
-  } else {
-    doc.setFont("helvetica", "normal");
-    const splitText = doc.splitTextToSize(text, maxWidth);
-    doc.text(splitText, x, y);
-  }
-}
 
-//
 // = Application automatique à tous éléments existants
 document.querySelectorAll('div, p, span, label, textarea').forEach(el => {
   applyArabicStyleTo(el);
