@@ -318,6 +318,7 @@ const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
 // ===================== Titre des commentaires
       const commentsTitleYPosition = lastY - 3; // Position pour le titre
       doc.text("Commentaires:", 14, commentsTitleYPosition);
+      
 // ================= Position pour les commentaires
       const commentsYPosition = commentsTitleYPosition + 7; // Position pour les commentaires
       const marginRight = 14; // Marge droite
@@ -336,8 +337,14 @@ const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
       doc.setFontSize(11);
       //doc.setFont("helvetica", "italic");
       doc.setFont("Amiri", "bold");
-      doc.text(t.purchaseProcedureTitle, 14, lastY + 65);
-      doc.text(splitText, 14, lastY + 72);
+   //   doc.text(t.purchaseProcedureTitle, 14, lastY + 65);
+  //    doc.text(splitText, 14, lastY + 72);
+
+writeTextAutoLang(doc, t.purchaseProcedureTitle, 200, lastY + 65);
+writeTextAutoLang(doc, t.purchaseProcedure, 200, lastY + 72);
+
+
+      
 // ======================= pied de page 
       const pageCount = doc.internal.getNumberOfPages();
       for (let i = 1; i <= pageCount; i++) {
