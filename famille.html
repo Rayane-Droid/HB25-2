@@ -340,12 +340,7 @@ writeTextAutoLang(doc, t.photoText || "Commentaires:", 200, commentsTitleYPositi
       const pageWidth = doc.internal.pageSize.getWidth();
       const textWidth = doc.getTextDimensions(commentaires).w;
 // ====== Vérifiez si le texte dépasse la marge droite
-      if (textWidth + marginRight > pageWidth) {
-        // Si le texte dépasse, utilisez splitTextToSize pour gérer le débordement
-        const splitComments = doc.splitTextToSize(commentaires, pageWidth - 39); // 14px de chaque côté pour les marges
-  //      doc.text(splitComments, 14, commentsYPosition);
-     
-  //    writeTextAutoLang(doc, t.photoText || "Commentaires:", 200, commentsTitleYPosition);
+
 writeTextAutoLang(doc, commentaires, 200, commentsYPosition);
 
       
