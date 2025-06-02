@@ -223,10 +223,17 @@
      // ================================== Amélioration UX : désactiver les boutons après action
     function saveToPDF() {
       const t = translations[currentLanguage];
+
+
+
+        // Désactiver le bouton au début de la fonction
+  saveBtn.disabled = true;
+      
       const rows = document.querySelectorAll("#property-body tr");
       for (let row of rows) {
         if (row.getAttribute("data-checked") !== "true") {
           alert(t.actionRequired);
+                saveBtn.disabled = false; // Réactiver si erreur
           return;
         }
       }
@@ -236,6 +243,7 @@
       // ================================== Vérifiez la longueur des commentaires
       if (commentaires.length > 300) {
         alert("Les commentaires ne doivent pas dépasser 300 caractères...");
+        saveBtn.disabled = false; // Réactiver si erreur
         return;
       }
       const {
@@ -353,6 +361,9 @@ const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
       doc.save(filename);
       alert(`${t.pdfSaved} ${filename}`);
       resetApp();
+
+      // Réactiver le bouton à la fin
+  saveBtn.disabled = false;
     }
 // =========================================================================================== 
     window.addEventListener("load", () => {
