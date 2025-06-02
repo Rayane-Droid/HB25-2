@@ -1,236 +1,232 @@
- 
+
 const properties = [
-      {
-         keys: {
-		  "fr": "Villa",
-		  "en": "Villa",
-		  "ar": "فيلا",
-		  "es": "Villa",
-		  "de": "Villa",
-		  "it": "Villa",
-		},
-        photo: "https://exemple.com/villa-photo.jpg",
-        video: "https://exemple.com/villa-video.mp4",
-        titles: {
-          fr: "Belle Villa moderne",
-          en: "Beautiful Modern Villa",
-          ar: "فيلا جميلة وحديثة",
-          es: "Hermosa villa moderna",
-          de: "Schöne moderne Villa",
-          it: "Bella villa moderna"
-        },
-        descriptions: {
-          fr: "Grande villa avec piscine et jardin.",
-          en: "Large villa with pool and garden.",
-          ar: "فيلا كبيرة مع مسبح وحديقة.",
-          es: "Amplia villa con piscina y jardín.",
-          de: "Große Villa mit Pool und Garten.",
-          it: "Grande villa con piscina e giardino."
-        },
-        areas: {
-          fr: "350 m²",
-          en: "350 sqm",
-          ar: "350 متر مربع",
-          es: "350 m²",
-          de: "350 m²",
-          it: "350 m²"
-        },
-        prices: {
-          fr: "3 000 000 DH",
-          en: "3,000,000 DH",
-          ar: "3,000,000 درهم",
-          es: "3.000.000 DH",
-          de: "3.000.000 DH",
-          it: "3.000.000 DH"
-        }
-      },
-      {
-		  
-		  
-		  
-		keys: {
-		  "fr": "Garage",
-		  "en": "Garage",
-		  "ar": "كراج",
-		  "es": "Garaje",
-		  "de": "Garage",
-		  "it": "Garage",
-		},
-        photo: "https://exemple.com/garage-photo.jpg",
-        video: "https://exemple.com/garage-video.mp4",
-        titles: {
-          fr: "Garage sécurisé",
-          en: "Secure Garage",
-          ar: "كراج آمن",
-          es: "Garaje seguro",
-          de: "Sichere Garage",
-          it: "Garage sicuro"
-        },
-        descriptions: {
-          fr: "Garage spacieux avec système de sécurité.",
-          en: "Spacious garage with security system.",
-          ar: "كراج واسع مع نظام أمني.",
-          es: "Garaje espacioso con sistema de seguridad.",
-          de: "Geräumige Garage mit Sicherheitssystem.",
-          it: "Garage spazioso con sistema di sicurezza."
-        },
-        areas: {
-          fr: "50 m²",
-          en: "50 sqm",
-          ar: "50 متر مربع",
-          es: "50 m²",
-          de: "50 m²",
-          it: "50 m²"
-        },
-        prices: {
-          fr: "500 000 DH",
-          en: "500,000 DH",
-          ar: "500,000 درهم",
-          es: "500.000 DH",
-          de: "500.000 DH",
-          it: "500.000 DH"
-        }
-      },
-      {
+  {
+    keys: {
+      fr: "Villa",
+      en: "Villa",
+      ar: "فيلا",
+      es: "Villa",
+      de: "Villa",
+      it: "Villa"
+    },
+    photo: "https://exemple.com/villa-photo.jpg",
+    video: "https://exemple.com/villa-video.mp4",
+    titles: {
+      fr: "Belle Villa moderne",
+      en: "Beautiful Modern Villa",
+      ar: "فيلا جميلة وحديثة",
+      es: "Hermosa villa moderna",
+      de: "Schöne moderne Villa",
+      it: "Bella villa moderna"
+    },
+    descriptions: {
+      fr: "Grande villa avec piscine et jardin.",
+      en: "Large villa with pool and garden.",
+      ar: "فيلا كبيرة مع مسبح وحديقة.",
+      es: "Amplia villa con piscina y jardín.",
+      de: "Große Villa mit Pool und Garten.",
+      it: "Grande villa con piscina e giardino."
+    },
+    areas: {
+      fr: "350 m²",
+      en: "350 sqm",
+      ar: "350 متر مربع",
+      es: "350 m²",
+      de: "350 m²",
+      it: "350 m²"
+    },
+    prices: {
+      fr: "3 000 000 DH",
+      en: "3,000,000 DH",
+      ar: "3,000,000 درهم",
+      es: "3.000.000 DH",
+      de: "3.000.000 DH",
+      it: "3.000.000 DH"
+    }
+  },
+  {
+    keys: {
+      fr: "Garage",
+      en: "Garage",
+      ar: "كراج",
+      es: "Garaje",
+      de: "Garage",
+      it: "Garage"
+    },
+    photo: "https://exemple.com/garage-photo.jpg",
+    video: "https://exemple.com/garage-video.mp4",
+    titles: {
+      fr: "Garage sécurisé",
+      en: "Secure Garage",
+      ar: "كراج آمن",
+      es: "Garaje seguro",
+      de: "Sichere Garage",
+      it: "Garage sicuro"
+    },
+    descriptions: {
+      fr: "Garage spacieux avec système de sécurité.",
+      en: "Spacious garage with security system.",
+      ar: "كراج واسع مع نظام أمني.",
+      es: "Garaje espacioso con sistema de seguridad.",
+      de: "Geräumige Garage mit Sicherheitssystem.",
+      it: "Garage spazioso con sistema di sicurezza."
+    },
+    areas: {
+      fr: "50 m²",
+      en: "50 sqm",
+      ar: "50 متر مربع",
+      es: "50 m²",
+      de: "50 m²",
+      it: "50 m²"
+    },
+    prices: {
+      fr: "500 000 DH",
+      en: "500,000 DH",
+      ar: "500,000 درهم",
+      es: "500.000 DH",
+      de: "500.000 DH",
+      it: "500.000 DH"
+    }
+  },
+  {
+    keys: {
+      fr: "Terrain1",
+      en: "Land",
+      ar: "أرض",
+      es: "Terreno",
+      de: "Grundstück",
+      it: "Terreno"
+    },
+    photo: "https://exemple.com/terrain1-photo.jpg",
+    video: "https://exemple.com/terrain1-video.mp4",
+    titles: {
+      fr: "Terrain agricole fertile",
+      en: "Fertile Agricultural Land",
+      ar: "أرض زراعية خصبة",
+      es: "Terreno agrícola fértil",
+      de: "Fruchtbares Ackerland",
+      it: "Terreno agricolo fertile"
+    },
+    descriptions: {
+      fr: "Terrain idéal pour la culture, bien irrigué.",
+      en: "Ideal land for farming, well irrigated.",
+      ar: "أرض مثالية للزراعة، مزودة بالري الجيد.",
+      es: "Terreno ideal para cultivo, bien irrigado.",
+      de: "Ideal für Landwirtschaft, gut bewässert.",
+      it: "Terreno ideale per l'agricoltura, ben irrigato."
+    },
+    areas: {
+      fr: "1000 m²",
+      en: "1000 sqm",
+      ar: "1000 متر مربع",
+      es: "1000 m²",
+      de: "1000 m²",
+      it: "1000 m²"
+    },
+    prices: {
+      fr: "800 000 DH",
+      en: "800,000 DH",
+      ar: "800,000 درهم",
+      es: "800.000 DH",
+      de: "800.000 DH",
+      it: "800.000 DH"
+    }
+  },
+  {
+    keys: {
+      fr: "Terrain2",
+      en: "Land2",
+      ar: "2 أرض ",
+      es: "Terreno2",
+      de: "Grundstück2",
+      it: "Terreno2"
+    },
 
-		 keys: {
-		  "fr": "Terrain1",
-		  "en": "Land",
-		  "ar": "أرض",
-		  "es": "Terreno",
-		  "de": "Grundstück",
-		  "it": "Terreno",
-		},
-        photo: "https://exemple.com/terrain1-photo.jpg",
-        video: "https://exemple.com/terrain1-video.mp4",
-        titles: {
-          fr: "Terrain agricole fertile",
-          en: "Fertile Agricultural Land",
-          ar: "أرض زراعية خصبة",
-          es: "Terreno agrícola fértil",
-          de: "Fruchtbares Ackerland",
-          it: "Terreno agricolo fertile"
-        },
-        descriptions: {
-          fr: "Terrain idéal pour la culture, bien irrigué.",
-          en: "Ideal land for farming, well irrigated.",
-          ar: "أرض مثالية للزراعة، مزودة بالري الجيد.",
-          es: "Terreno ideal para cultivo, bien irrigado.",
-          de: "Ideal für Landwirtschaft, gut bewässert.",
-          it: "Terreno ideale per l'agricoltura, ben irrigato."
-        },
-        areas: {
-          fr: "1000 m²",
-          en: "1000 sqm",
-          ar: "1000 متر مربع",
-          es: "1000 m²",
-          de: "1000 m²",
-          it: "1000 m²"
-        },
-        prices: {
-          fr: "800 000 DH",
-          en: "800,000 DH",
-          ar: "800,000 درهم",
-          es: "800.000 DH",
-          de: "800.000 DH",
-          it: "800.000 DH"
-        }
-      },
-      {
-         keys: {
-		  "fr": "Terrain2",
-		  "en": "Land2",
-		  "ar": "2 أرض ",
-		  "es": "Terreno2",
-		  "de": "Grundstück2",
-		  "it": "Terreno2",
-		},
+    photo: "https://exemple.com/terrain2-photo.jpg",
+    video: "https://exemple.com/terrain2-video.mp4",
+    titles: {
+      fr: "Terrain constructible",
+      en: "Buildable Land",
+      ar: "أرض قابلة للبناء",
+      es: "Terreno urbanizable",
+      de: "Bebaubarer Land",
+      it: "Terreno edificabile"
+    },
+    descriptions: {
+      fr: "Terrain plat prêt pour construction résidentielle.",
+      en: "Flat land ready for residential building.",
+      ar: "أرض مستوية جاهزة للبناء السكني.",
+      es: "Terreno plano listo para construcción residencial.",
+      de: "Flaches Land bereit für Wohnbebauung.",
+      it: "Terreno pianeggiante pronto per costruzione residenziale."
+    },
+    areas: {
+      fr: "750 m²",
+      en: "750 sqm",
+      ar: "750 متر مربع",
+      es: "750 m²",
+      de: "750 m²",
+      it: "750 m²"
+    },
+    prices: {
+      fr: "1 200 000 DH",
+      en: "1,200,000 DH",
+      ar: "1,200,000 درهم",
+      es: "1.200.000 DH",
+      de: "1.200.000 DH",
+      it: "1.200.000 DH"
+    }
+  },
+  {
+    keys: {
+      fr: "Terrain3",
+      en: "Land3",
+      ar: "3 أرض ",
+      es: "Terreno3",
+      de: "Grundstück3",
+      it: "Terreno3"
+    },
 
-        photo: "https://exemple.com/terrain2-photo.jpg",
-        video: "https://exemple.com/terrain2-video.mp4",
-        titles: {
-          fr: "Terrain constructible",
-          en: "Buildable Land",
-          ar: "أرض قابلة للبناء",
-          es: "Terreno urbanizable",
-          de: "Bebaubarer Land",
-          it: "Terreno edificabile"
-        },
-        descriptions: {
-          fr: "Terrain plat prêt pour construction résidentielle.",
-          en: "Flat land ready for residential building.",
-          ar: "أرض مستوية جاهزة للبناء السكني.",
-          es: "Terreno plano listo para construcción residencial.",
-          de: "Flaches Land bereit für Wohnbebauung.",
-          it: "Terreno pianeggiante pronto per costruzione residenziale."
-        },
-        areas: {
-          fr: "750 m²",
-          en: "750 sqm",
-          ar: "750 متر مربع",
-          es: "750 m²",
-          de: "750 m²",
-          it: "750 m²"
-        },
-        prices: {
-          fr: "1 200 000 DH",
-          en: "1,200,000 DH",
-          ar: "1,200,000 درهم",
-          es: "1.200.000 DH",
-          de: "1.200.000 DH",
-          it: "1.200.000 DH"
-        }
-      },
-      {
-        	 keys: {
-		  "fr": "Terrain3",
-		  "en": "Land3",
-		  "ar": "3 أرض ",
-		  "es": "Terreno3",
-		  "de": "Grundstück3",
-		  "it": "Terreno3",
-		},
+    photo: "https://exemple.com/terrain3-photo.jpg",
+    video: "https://exemple.com/terrain3-video.mp4",
+    titles: {
+      fr: "Terrain commercial",
+      en: "Commercial Land",
+      ar: "أرض تجارية",
+      es: "Terreno comercial",
+      de: "Gewerbegrundstück",
+      it: "Terreno commerciale"
+    },
+    descriptions: {
+      fr: "Terrain situé en zone commerciale dynamique.",
+      en: "Land located in a dynamic commercial area.",
+      ar: "أرض تقع في منطقة تجارية نشطة.",
+      es: "Terreno ubicado en una zona comercial dinámica.",
+      de: "Grundstück in dynamischem Gewerbegebiet gelegen.",
+      it: "Terreno situato in una zona commerciale dinamica."
+    },
+    areas: {
+      fr: "500 m²",
+      en: "500 sqm",
+      ar: "500 متر مربع",
+      es: "500 m²",
+      de: "500 m²",
+      it: "500 m²"
+    },
+    prices: {
+      fr: "2 000 000 DH",
+      en: "2,000,000 DH",
+      ar: "2,000,000 درهم",
+      es: "2.000.000 DH",
+      de: "2.000.000 DH",
+      it: "2.000.000 DH"
+    }
+  }
+];
 
-        photo: "https://exemple.com/terrain3-photo.jpg",
-        video: "https://exemple.com/terrain3-video.mp4",
-        titles: {
-          fr: "Terrain commercial",
-          en: "Commercial Land",
-          ar: "أرض تجارية",
-          es: "Terreno comercial",
-          de: "Gewerbegrundstück",
-          it: "Terreno commerciale"
-        },
-        descriptions: {
-          fr: "Terrain situé en zone commerciale dynamique.",
-          en: "Land located in a dynamic commercial area.",
-          ar: "أرض تقع في منطقة تجارية نشطة.",
-          es: "Terreno ubicado en una zona comercial dinámica.",
-          de: "Grundstück in dynamischem Gewerbegebiet gelegen.",
-          it: "Terreno situato in una zona commerciale dinamica."
-        },
-        areas: {
-          fr: "500 m²",
-          en: "500 sqm",
-          ar: "500 متر مربع",
-          es: "500 m²",
-          de: "500 m²",
-          it: "500 m²"
-        },
-        prices: {
-          fr: "2 000 000 DH",
-          en: "2,000,000 DH",
-          ar: "2,000,000 درهم",
-          es: "2.000.000 DH",
-          de: "2.000.000 DH",
-          it: "2.000.000 DH"
-        }
-      }
-    ];
+let currentLanguage = "fr";
 
-    let currentLanguage = "fr";
-
-    const translations = {
+const translations = {
   fr: {
     selectLanguage: "Choisissez votre langue :",
     welcome: "Bienvenue !",
@@ -243,12 +239,12 @@ const properties = [
     tableHeaders: [
       "N°",
       "Bien",
-   //   "Titre",
-  //    "Description",
+      //   "Titre",
+      //    "Description",
       "Superficie",
       "Prix",
-  //    "Photo",
-   //   "Vidéo",
+      //    "Photo",
+      //   "Vidéo",
       "Valider",
       "Proposition",
       "Annuler"
@@ -264,10 +260,19 @@ const properties = [
     pdfSaved: "PDF enregistré sous le nom :",
     purchaseProcedureTitle: "Procédure d'achat :",
     purchaseProcedure:
-      "1. Vérifiez les biens et les choix dans le tableau.\n" +
-      "2. Contactez notre service commercial au numéro indiqué.\n" +
-      "3. Un conseiller vous accompagnera pour finaliser la transaction.\n" +
-      "4. Vous recevrez une confirmation par email avec les détails.\n" +
+"01. Vérifiez les biens et les choix dans le tableau.\n" +
+"02. Contactez notre service commercial au numéro indiqué.\n" +
+"03. Un conseiller vous accompagnera pour finaliser la transaction.\n" +
+"04. Vous recevrez une confirmation par email avec les détails.\n" +
+"05. Vous recevrez une confirmation par email avec les détails.\n" +
+"06. Vous recevrez une confirmation par email avec les détails.\n" +      
+"07. Vous recevrez une confirmation par email avec les détails.\n" +      
+"08. Vous recevrez une confirmation par email avec les détails.\n" +      
+"09. Vous recevrez une confirmation par email avec les détails.\n" +      
+ "10. Vous recevrez une confirmation par email avec les détails.\n" +     
+ "11. Vous recevrez une confirmation par email avec les détails.\n" +      
+ "12. Vous recevrez une confirmation par email avec les détails.\n" +      
+ "13. Envoyer votre proposition par email/whatsup.\n" +
       "Merci de votre confiance.",
     summaryTitle: "Résumé des choix",
     nameLabel: "Nom :",
@@ -288,12 +293,12 @@ const properties = [
     tableHeaders: [
       "No.",
       "Property",
-   //   "Title",
-   //   "Description",
+      //   "Title",
+      //   "Description",
       "Area",
       "Price",
-   //   "Photo",
-   //   "Video",
+      //   "Photo",
+      //   "Video",
       "Validate",
       "Proposal",
       "Cancel"
@@ -333,12 +338,12 @@ const properties = [
     tableHeaders: [
       "رقم",
       "العقار",
-  //    "العنوان",
-  //    "الوصف",
+      //    "العنوان",
+      //    "الوصف",
       "المساحة",
       "السعر",
- //     "صورة",
-  //    "فيديو",
+      //     "صورة",
+      //    "فيديو",
       "تأكيد",
       "اقتراح",
       "إلغاء"
@@ -378,12 +383,12 @@ const properties = [
     tableHeaders: [
       "N°",
       "Propiedad",
-  //    "Título",
- //     "Descripción",
+      //    "Título",
+      //     "Descripción",
       "Superficie",
       "Precio",
-//      "Foto",
- //     "Vídeo",
+      //      "Foto",
+      //     "Vídeo",
       "Validar",
       "Propuesta",
       "Cancelar"
@@ -423,12 +428,12 @@ const properties = [
     tableHeaders: [
       "Nr.",
       "Immobilie",
-  //    "Titel",
- //     "Beschreibung",
+      //    "Titel",
+      //     "Beschreibung",
       "Fläche",
       "Preis",
- //     "Foto",
- //     "Video",
+      //     "Foto",
+      //     "Video",
       "Bestätigen",
       "Vorschlag",
       "Stornieren"
@@ -449,16 +454,12 @@ const properties = [
       "3. Ein Berater unterstützt Sie bei der Finalisierung der Transaktion.\n" +
       "4. Sie erhalten eine Bestätigungs-E-Mail mit Details.\n" +
       "Vielen Dank für Ihr Vertrauen.",
-    
-    
-    
-    
+
     summaryTitle: "Zusammenfassung der Auswahl",
     nameLabel: "Name:",
     phoneLabel: "Telefon:",
     dateLabel: "Eingabedatum:",
-    
-    
+
     photoText: "Foto",
     videoText: "Video"
   },
@@ -474,12 +475,12 @@ const properties = [
     tableHeaders: [
       "N°",
       "Immobile",
-    //  "Titolo",
-  //    "Descrizione",
+      //  "Titolo",
+      //    "Descrizione",
       "Superficie",
       "Prezzo",
-  //    "Foto",
-  //    "Video",
+      //    "Foto",
+      //    "Video",
       "Conferma",
       "Proposta",
       "Annulla"
@@ -507,4 +508,4 @@ const properties = [
     photoText: "Foto",
     videoText: "Video"
   }
-};   
+};
