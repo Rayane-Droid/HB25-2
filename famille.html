@@ -6,29 +6,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vente de Biens</title>
-  
   <link rel="stylesheet" href="famille.css" />
-  
   <script src="dictionnaire.js" defer></script>
-
-  <script src="script.js" defer></script>
-  
+  <script src="https://cdn.jsdelivr.net/gh/Rayane-Droid/famille/amiri.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js" defer></script>
 
-  <!-- Amiri -->
+  <!-- Amiri via Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet" />
+
   <link rel="preload" href="Amiri-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <script src="https://cdn.jsdelivr.net/gh/Rayane-Droid/famille/amiri.js" defer></script>
   <script src="amiri-font.js"></script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://unpkg.com/jspdf@latest/dist/polyfills.umd.js"></script>
-<script src="https://unpkg.com/jspdf@latest/dist/fonts/Amiri-normal.js"></script>
-<script src="https://unpkg.com/jspdf@latest/dist/fonts/Amiri-bold.js"></script>
-
+    
 </head>
+
+<style>
+</style>
     <!--   -->
 <body>
   <div id="language-selection">
@@ -196,7 +189,7 @@
               alert(t.invalidPrice);
               return;
             }
-            //row.querySelector(".proposal-cell").innerText = value + " DH";
+          
             row.querySelector(".proposal-cell").textContent = value + " DH";
             row.querySelector(".validate-cell").innerHTML = "";
             row.querySelector(".cancel-cell").innerHTML = "";
@@ -226,11 +219,7 @@
         tbody.appendChild(row);
       });
     }
-    // =================================================
-
-
-    
-
+    // ==================== saveToPDF 
     function saveToPDF() {
       const t = translations[currentLanguage];
       const rows = document.querySelectorAll("#property-body tr");
@@ -243,28 +232,16 @@
       const nomUtilisateur = document.getElementById("username").value || t.nameLabel + " " + "Non renseigné";
       const telephoneUtilisateur = document.getElementById("phone").value || t.phoneLabel + " " + "Non renseigné";
       const commentaires = document.getElementById("comments").value || "Aucun commentaire";
-      // ================================== Vérifiez la longueur des commentaires
+      // === Vérifiez la longueur des commentaires
       if (commentaires.length > 300) {
         alert("Les commentaires ne doivent pas dépasser 300 caractères...");
         return;
       }
-
-
-      
-const { jsPDF } = window.jspdf;
-jsPDF.API.events.push(['addFonts', function() {
-  this.addFileToVFS("Amiri-Regular.ttf", amiri); // contenu base64
-  this.addFont("Amiri-Regular.ttf", "Amiri", "normal");
-  this.addFont("Amiri-Regular.ttf", "Amiri", "bold");
-}]);
-
-const {
+      const {
         jsPDF
       } = window.jspdf;
-
-      
       const doc = new jsPDF();
-      // ================================== Date actuelle formatée pour affichage selon langue
+    // == Date actuele formaté a afficher selon langue
       const date = new Date();
       const localeForDate = currentLanguage === "ar" ? "ar-EG" : currentLanguage + '-' + currentLanguage.toUpperCase();
       const dateStr = date.toLocaleDateString(localeForDate, {
@@ -295,14 +272,13 @@ const {
         const bien = cells[1].innerText.trim();
         const superficie = cells[2].innerText.trim();
         const prix = cells[3].innerText.trim();
-        // ================================== Choix (valider, proposer, annuler)
-        let choix = "";
-        if (cells[4].innerText.trim()) choix = cells[4].innerText.trim();
-        else if (cells[5].innerText.trim()) choix = cells[5].innerText.trim();
-        else if (cells[6].innerText.trim()) choix = cells[6].innerText.trim();
+        // ====== Choix (valider, proposer, annuler)
+        const choix = [4, 5, 6].map(i => cells[i].innerText.trim()).find(val => val) || "";
+ 
         bodyData.push([bien, superficie, prix, choix]);
-      });
-// ================================== Générer le tableau avec autoTable
+      });  
+
+// ============= Générer le tableau avec autoTable
     doc.autoTable({
   startY: 55,
   head: [
@@ -335,19 +311,19 @@ const {
 });
 
 const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
-// ================================== Ajout des commentaires au PDF
+// ==================== Ajout des commentaires au PDF
       doc.setFontSize(11);
      //doc.setFont("helvetica", "normal");
       doc.setFont("Amiri", "bold");
-// ================================== Titre des commentaires
+// ===================== Titre des commentaires
       const commentsTitleYPosition = lastY - 3; // Position pour le titre
       doc.text("Commentaires:", 14, commentsTitleYPosition);
-// ================================== Position pour les commentaires
+// ================= Position pour les commentaires
       const commentsYPosition = commentsTitleYPosition + 7; // Position pour les commentaires
       const marginRight = 14; // Marge droite
       const pageWidth = doc.internal.pageSize.getWidth();
       const textWidth = doc.getTextDimensions(commentaires).w;
-// ================================== Vérifiez si le texte dépasse la marge droite
+// ====== Vérifiez si le texte dépasse la marge droite
       if (textWidth + marginRight > pageWidth) {
         // Si le texte dépasse, utilisez splitTextToSize pour gérer le débordement
         const splitComments = doc.splitTextToSize(commentaires, pageWidth - 39); // 14px de chaque côté pour les marges
@@ -355,14 +331,14 @@ const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
       } else {
         doc.text(commentaires, 14, commentsYPosition);
       }
-// ================================== Texte procédure d'achat traduit
+// ================== Texte procédure d'achat traduit
       const splitText = doc.splitTextToSize(t.purchaseProcedure, 180);
       doc.setFontSize(11);
       //doc.setFont("helvetica", "italic");
       doc.setFont("Amiri", "bold");
       doc.text(t.purchaseProcedureTitle, 14, lastY + 65);
       doc.text(splitText, 14, lastY + 72);
-// ============== ================================================================ pied de page 
+// ======================= pied de page 
       const pageCount = doc.internal.getNumberOfPages();
       for (let i = 1; i <= pageCount; i++) {
         doc.setPage(i);
@@ -371,43 +347,46 @@ const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
           align: "right"
         });
       }
-//==============================================================
+//======================================
       doc.save(filename);
       alert(`${t.pdfSaved} ${filename}`);
       resetApp();
     }
-// =========================================================================================== 
+// ==================================================
     window.addEventListener("load", () => {
       document.getElementById("language-selection").classList.remove("hidden");
     });
-// =========================================================caracteres arab 
+// =============================== caracteres arab 
    function isArabic(text) {
   return /[\u0600-\u06FF]/.test(text);
 }
-
+    
 function applyArabicStyleTo(element) {
-  if (isArabic(element.textContent || element.value || "")) {
+  if (isArabic(element)) {
     element.classList.add("texte-arabe");
   }
 }
-//=================================
+
 const titleElement = document.createElement('div');
 //titleElement = exampleTitle;
 applyArabicStyleTo(titleElement);
 document.body.appendChild(titleElement);
-
-    // Avant d’écrire un texte, vérifie s'il contient de l'arabe
-    function setFontAccordingToText(doc, text) {
+    
+// Avant d’écrire un texte, vérifie si contient l'arabe
+function setFontAccordingToText(doc, text) {
   if (isArabic(text)) {
-    doc.text(text, 200, 15, { align: 'right' });
+    doc.setFont("Amiri", "bold");  // Police arabe
   } else {
-    doc.text(text, 105, 15, null, null, 'center');
+    doc.setFont("helvetica", "normal"); // Police latine classique
   }
-}
-// ========================================================= Application automatique à tous les éléments existants
+}    
+    
+// = Application automatique à tous éléments existants
 document.querySelectorAll('div, p, span').forEach(el => {
   applyArabicStyleTo(el);
-}); 
+});
+    
   </script>
 </body>
+
 </html>
