@@ -221,6 +221,9 @@
       });
     }
     // =================================================
+
+
+
     function saveToPDF() {
       const t = translations[currentLanguage];
       const rows = document.querySelectorAll("#property-body tr");
@@ -238,9 +241,7 @@
         alert("Les commentaires ne doivent pas dépasser 300 caractères...");
         return;
       }
-      // Amiri 
-doc.addFont('Amiri-Regular.ttf', 'Amiri', 'normal');
-doc.setFont('Amiri');
+
 
       const {
         jsPDF
