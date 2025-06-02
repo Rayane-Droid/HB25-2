@@ -367,30 +367,26 @@ const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
    function isArabic(text) {
   return /[\u0600-\u06FF]/.test(text);
 }
-    
+
 function applyArabicStyleTo(element) {
-  if (isArabic(element)) {
+  if (isArabic(element.textContent || element.value || "")) {
     element.classList.add("texte-arabe");
   }
 }
-
+//=================================
 const titleElement = document.createElement('div');
 //titleElement = exampleTitle;
 applyArabicStyleTo(titleElement);
 document.body.appendChild(titleElement);
 
-  // Avant d’écrire un texte, vérifie s'il contient de l'arabe
-function setFontAccordingToText(doc, text) {
-if (isArabic(t.summaryTitle)) {
-  doc.text(t.summaryTitle, 200, 15, { align: 'right' });
-} else {
-  doc.text(t.summaryTitle, 105, 15, null, null, 'center');
+    // Avant d’écrire un texte, vérifie s'il contient de l'arabe
+    function setFontAccordingToText(doc, text) {
+  if (isArabic(text)) {
+    doc.text(text, 200, 15, { align: 'right' });
+  } else {
+    doc.text(text, 105, 15, null, null, 'center');
+  }
 }
-
-}
-
-
-    
 // ========================================================= Application automatique à tous les éléments existants
 document.querySelectorAll('div, p, span').forEach(el => {
   applyArabicStyleTo(el);
