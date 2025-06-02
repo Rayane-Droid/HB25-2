@@ -222,7 +222,13 @@
     }
     // =================================================
 
-
+const { jsPDF } = window.jspdf;
+jsPDF.API.events.push(['addFonts', function() {
+  this.addFileToVFS("Amiri-Regular.ttf", amiri); // contenu base64
+  this.addFont("Amiri-Regular.ttf", "Amiri", "normal");
+  this.addFont("Amiri-Regular.ttf", "Amiri", "bold");
+}]);
+    
 
     function saveToPDF() {
       const t = translations[currentLanguage];
