@@ -323,17 +323,11 @@ const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
      //doc.setFont("helvetica", "normal");
       doc.setFont("Amiri", "bold");
 // ===================== Titre des commentaires
-      const commentsTitleYPosition = lastY - 3; // Position pour le titre
- //     doc.text("Commentaires:", 14, commentsTitleYPosition);
-
-
-writeTextAutoLang(doc, t.photoText || "Commentaires:", 200, commentsTitleYPosition);
-//writeTextAutoLang(doc, commentaires, 200, commentsYPosition);
-
-
-
-
       
+const commentsTitleYPosition = lastY - 3;
+writeTextAutoLang(doc, t.photoText || "Commentaires:", 200, commentsTitleYPosition);
+
+
 // ================= Position pour les commentaires
       const commentsYPosition = commentsTitleYPosition + 7; // Position pour les commentaires
       const marginRight = 14; // Marge droite
@@ -341,8 +335,9 @@ writeTextAutoLang(doc, t.photoText || "Commentaires:", 200, commentsTitleYPositi
       const textWidth = doc.getTextDimensions(commentaires).w;
 // ====== Vérifiez si le texte dépasse la marge droite
 
+const commentsYPosition = commentsTitleYPosition + 7;
 writeTextAutoLang(doc, commentaires, 200, commentsYPosition);
-
+      
       
       } else {
         doc.text(commentaires, 14, commentsYPosition);
