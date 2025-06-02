@@ -1,13 +1,13 @@
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vente de Biens</title>
-  <link rel="stylesheet" href="famille.css" /> <!-- Lien vers le fichier CSS -->
+  <link rel="stylesheet" href="famille.css" />
   <script src="dictionnaire.js" defer></script>
-  <script src="script.js" defer></script>
   <script src="https://cdn.jsdelivr.net/gh/Rayane-Droid/famille/amiri.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js" defer></script>
@@ -17,11 +17,12 @@
 
   <link rel="preload" href="Amiri-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <script src="amiri-font.js"></script>
+    
 </head>
 
 <style>
 </style>
-  
+    <!--   -->
 <body>
   <div id="language-selection">
     <h2 id="language-prompt">
@@ -44,18 +45,16 @@
       </select>
     </div>
   </div>
-
+    <!--   -->
   <div id="user-form" class="hidden" aria-live="polite" aria-label="Formulaire utilisateur">
     <h2 id="welcome-message">Bienvenue !</h2>
     <div class="input-block">
       <label id="label-username" for="username">Nom d'utilisateur :</label>
-      <!--  <input type="text" id="username" aria-required="true" /> -->
-      <input type="text" id="username" required />
+      <input type="text" id="username" aria-required="true" />
     </div>
     <div class="input-block">
       <label id="label-phone" for="phone">Numéro de téléphone :</label>
-      <!--  <input type="text" id="phone" aria-required="true" /> -->
-      <input type="text" id="phone" required />
+      <input type="text" id="phone" aria-required="true" />
     </div>
     <button class="btn" id="btn-continue" onclick="submitUserInfo()">Continuer</button>
   </div>
@@ -64,21 +63,20 @@
     <button class="btn" onclick="resetApp()" id="btn-back">Retour au menu des langues</button>
     <h2 id="property-title">Nos biens disponibles :</h2>
     <table id="property-table" role="table" aria-describedby="property-title">
-     
-          <thead>
-  <tr>
-    <th>N°</th>              <!-- cells[0] -->
-    <th>Bien</th>            <!-- cells[1] -->
-    <th>Superficie</th>      <!-- cells[2] -->
-    <th>Prix</th>            <!-- cells[3] -->
-    <th>Valider</th>         <!-- cells[4] -->
-    <th>Proposition</th>     <!-- cells[5] -->
-    <th>Annuler</th>         <!-- cells[6] -->
-  </tr>
-</thead>
+    <!--   -->
+      <thead>
+        <tr>
+          <th>N°</th> <!-- cells[0] -->
+          <th>Bien</th> <!-- cells[1] -->
+          <th>Superficie</th> <!-- cells[2] -->
+          <th>Prix</th> <!-- cells[3] -->
+          <th>Valider</th> <!-- cells[4] -->
+          <th>Proposition</th> <!-- cells[5] -->
+          <th>Annuler</th> <!-- cells[6] -->
+        </tr>
+      </thead>
       <tbody id="property-body"></tbody>
     </table>
-
     <!-- Champ de commentaires -->
     <div class="input-block">
       <label for="comments">Commentaires :</label>
@@ -87,11 +85,10 @@
     <br />
     <button class="btn" onclick="saveToPDF()" id="btn-save">Enregistrer en PDF</button>
   </div>
-  // ================================== script 
-    <script>
-      // ================================== dictionnaire   
-   
-     // ================================== selectionner la langue
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  <script>
+    // ================================== 
     function selectLanguage() {
       const lang = document.getElementById("language").value;
       if (!lang) return;
@@ -164,6 +161,7 @@
           <td class="proposal-cell"></td>
           <td class="cancel-cell"></td>
         `;
+        // ================================== 
         const validateBtn = document.createElement("button");
         validateBtn.innerText = t.validate;
         validateBtn.className = "btn";
@@ -181,7 +179,7 @@
           input.type = "number";
           input.placeholder = t.propose + " un prix";
           input.style.width = "120px";
-   //===================================
+          //===================================
           const sendBtn = document.createElement("button");
           sendBtn.innerText = t.continue;
           sendBtn.className = "btn";
@@ -191,12 +189,13 @@
               alert(t.invalidPrice);
               return;
             }
-            row.querySelector(".proposal-cell").innerText = value + " DH";
+            //row.querySelector(".proposal-cell").innerText = value + " DH";
+            row.querySelector(".proposal-cell").textContent = value + " DH";
             row.querySelector(".validate-cell").innerHTML = "";
             row.querySelector(".cancel-cell").innerHTML = "";
             row.setAttribute("data-checked", "true");
           };
- //===================================
+          //===================================
           const proposalCell = row.querySelector(".proposal-cell");
           proposalCell.innerHTML = "";
           proposalCell.appendChild(input);
@@ -204,7 +203,7 @@
           row.querySelector(".validate-cell").innerHTML = "";
           row.querySelector(".cancel-cell").innerHTML = "";
         };
- //===================================
+        //===================================
         const cancelBtn = document.createElement("button");
         cancelBtn.innerText = t.cancel;
         cancelBtn.className = "btn";
@@ -220,7 +219,8 @@
         tbody.appendChild(row);
       });
     }
-    // ================================== 
+    // ================================== Amélioration UX : désactiver les boutons après action
+     // ================================== Amélioration UX : désactiver les boutons après action
     function saveToPDF() {
       const t = translations[currentLanguage];
       const rows = document.querySelectorAll("#property-body tr");
@@ -256,11 +256,13 @@
       const filename = `Offre_${filenameDate}.pdf`;
       // ================================== Titre
       doc.setFontSize(18);
-      doc.setFont("helvetica", "bold");
+    // doc.setFont("helvetica", "bold");
+      doc.setFont("Amiri", "bold");
       doc.text(t.summaryTitle, 105, 15, null, null, "center");
       // ================================== Infos utilisateur et date
       doc.setFontSize(11);
-      doc.setFont("helvetica", "normal");
+    //  doc.setFont("helvetica", "normal");
+      doc.setFont("Amiri", "bold");
       doc.text(` ${t.dateLabel} ${dateStr}`, 14, 30);
       doc.text(` ${t.nameLabel} ${nomUtilisateur}`, 14, 38);
       doc.text(` ${t.phoneLabel} ${telephoneUtilisateur}`, 14, 46);
@@ -273,57 +275,57 @@
         const prix = cells[3].innerText.trim();
         // ================================== Choix (valider, proposer, annuler)
         let choix = "";
-if (cells[4].innerText.trim()) choix = cells[4].innerText.trim();
-else if (cells[5].innerText.trim()) choix = cells[5].innerText.trim();
-else if (cells[6].innerText.trim()) choix = cells[6].innerText.trim();
+        if (cells[4].innerText.trim()) choix = cells[4].innerText.trim();
+        else if (cells[5].innerText.trim()) choix = cells[5].innerText.trim();
+        else if (cells[6].innerText.trim()) choix = cells[6].innerText.trim();
         bodyData.push([bien, superficie, prix, choix]);
       });
-      // ================================== Générer le tableau avec autoTable
-      doc.autoTable({
-        startY: 55,
-        head: [
-          [t.tableHeaders[1], t.tableHeaders[2], t.tableHeaders[3], "Choix"]
-        ],
-        body: bodyData,
-        styles: {
-          font: "helvetica",
-          fontSize: 10,
-          cellPadding: 3
-        },
-        headStyles: {
-          fillColor: [41, 128, 185],
-          textColor: 255,
-          fontStyle: "bold"
-        },
-        alternateRowStyles: {
-          fillColor: [240, 240, 240]
-        },
-        margin: {
-          left: 14,
-          right: 14
-        },
+// ================================== Générer le tableau avec autoTable
+    doc.autoTable({
+  startY: 55,
+  head: [
+    [t.tableHeaders[1], t.tableHeaders[2], t.tableHeaders[3], "Choix"]
+  ],
+  body: bodyData,
+  styles: {
+    font: "Amiri",
+    fontSize: 10,
+    cellPadding: 3
+  },
+  headStyles: {
+    fillColor: [41, 128, 185],
+    textColor: 255,
+    fontStyle: "bold"
+  },
+  alternateRowStyles: {
+    fillColor: [240, 240, 240]
+  },
+  margin: {
+    left: 14,
+    right: 14
+  },
+  columnStyles: {
+    0: { cellWidth: 25 },
+    1: { cellWidth: 25 },
+    2: { cellWidth: 35 },
+    3: { cellWidth: 45 }
+  }
+});
 
-        columnStyles: {
-      0: { cellWidth: 25 },
-      1: { cellWidth: 25 },
-      2: { cellWidth: 35 },
-      3: { cellWidth: 45 },
-      4: { cellWidth: 25 }
-    }
-      });
-      const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
-      // ================================== Ajout des commentaires au PDF
+const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
+// ================================== Ajout des commentaires au PDF
       doc.setFontSize(11);
-      doc.setFont("helvetica", "normal");
-      // ================================== Titre des commentaires
+     //doc.setFont("helvetica", "normal");
+      doc.setFont("Amiri", "bold");
+// ================================== Titre des commentaires
       const commentsTitleYPosition = lastY - 3; // Position pour le titre
       doc.text("Commentaires:", 14, commentsTitleYPosition);
-      // ================================== Position pour les commentaires
+// ================================== Position pour les commentaires
       const commentsYPosition = commentsTitleYPosition + 7; // Position pour les commentaires
       const marginRight = 14; // Marge droite
       const pageWidth = doc.internal.pageSize.getWidth();
       const textWidth = doc.getTextDimensions(commentaires).w;
-      // ================================== Vérifiez si le texte dépasse la marge droite
+// ================================== Vérifiez si le texte dépasse la marge droite
       if (textWidth + marginRight > pageWidth) {
         // Si le texte dépasse, utilisez splitTextToSize pour gérer le débordement
         const splitComments = doc.splitTextToSize(commentaires, pageWidth - 39); // 14px de chaque côté pour les marges
@@ -331,28 +333,66 @@ else if (cells[6].innerText.trim()) choix = cells[6].innerText.trim();
       } else {
         doc.text(commentaires, 14, commentsYPosition);
       }
-      // ================================== Texte procédure d'achat traduit
+// ================================== Texte procédure d'achat traduit
       const splitText = doc.splitTextToSize(t.purchaseProcedure, 180);
       doc.setFontSize(11);
-      doc.setFont("helvetica", "italic");
+      //doc.setFont("helvetica", "italic");
+      doc.setFont("Amiri", "bold");
       doc.text(t.purchaseProcedureTitle, 14, lastY + 65);
       doc.text(splitText, 14, lastY + 72);
-      // pied de page 
-    const pageCount = doc.internal.getNumberOfPages();
-for (let i = 1; i <= pageCount; i++) {
-  doc.setPage(i);
-  doc.setFontSize(8);
-  doc.text(`Page ${i} / ${pageCount}`, pageWidth - marginRight, doc.internal.pageSize.getHeight() - 10, { align: "right" });
-}
- //======
+// ============== ================================================================ pied de page 
+      const pageCount = doc.internal.getNumberOfPages();
+      for (let i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        doc.setFontSize(8);
+        doc.text(`Page ${i} / ${pageCount}`, pageWidth - marginRight, doc.internal.pageSize.getHeight() - 10, {
+          align: "right"
+        });
+      }
+//==============================================================
       doc.save(filename);
       alert(`${t.pdfSaved} ${filename}`);
       resetApp();
     }
-    // ================================== 
+// =========================================================================================== 
     window.addEventListener("load", () => {
       document.getElementById("language-selection").classList.remove("hidden");
-    });  
+    });
+// =========================================================caracteres arab 
+   function isArabic(text) {
+  return /[\u0600-\u06FF]/.test(text);
+}
+    
+function applyArabicStyleTo(element) {
+  if (isArabic(element)) {
+    element.classList.add("texte-arabe");
+  }
+}
+
+const titleElement = document.createElement('div');
+//titleElement = exampleTitle;
+applyArabicStyleTo(titleElement);
+document.body.appendChild(titleElement);
+    
+    
+    
+  // Avant d’écrire un texte, vérifie s'il contient de l'arabe
+function setFontAccordingToText(doc, text) {
+  if (isArabic(text)) {
+    doc.setFont("Amiri", "bold");  // Police arabe
+  } else {
+    doc.setFont("helvetica", "normal"); // Police latine classique
+  }
+}
+  
+    
+    
+    
+// ========================================================= Application automatique à tous les éléments existants
+document.querySelectorAll('div, p, span').forEach(el => {
+  applyArabicStyleTo(el);
+});
+    
   </script>
 </body>
 
