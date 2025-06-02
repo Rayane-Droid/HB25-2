@@ -303,10 +303,10 @@
     right: 14
   },
   columnStyles: {
-    0: { cellWidth: 25 },
-    1: { cellWidth: 25 },
-    2: { cellWidth: 35 },
-    3: { cellWidth: 45 }
+    0: { cellWidth: 'auto' },
+    1: { cellWidth: 'auto' },
+    2: { cellWidth: 'auto' },
+    3: { cellWidth: 'auto' }
   }
 });
 
@@ -368,20 +368,6 @@ function applyArabicStyleTo(element) {
     element.classList.add("texte-arabe");
   }
 }
-//
-//const titleElement = document.createElement('div');
-//titleElement = exampleTitle;
-//applyArabicStyleTo(titleElement);
-//document.body.appendChild(titleElement);
-    
-// Avant d’écrire un texte, vérifie si contient l'arabe
-//function setFontAccordingToText(doc, text) {
-//  if (isArabic(text)) {
-//    doc.setFont("Amiri", "bold");  // Police arabe
-//  } else {
-//    doc.setFont("helvetica", "normal"); // Police latine classique
-//  }
-//}    
 //
 function writeTextAutoLang(doc, text, x, y, maxWidth = 180) {
   if (isArabic(text)) {
