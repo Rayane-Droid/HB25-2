@@ -357,34 +357,50 @@ const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
       document.getElementById("language-selection").classList.remove("hidden");
     });
 // =============================== caracteres arab 
-   function isArabic(text) {
-  return /[\u0600-\u06FF]/.test(text);
+//
+if (isArabic(element)) {
+  element.classList.add("texte-arabe");
 }
-    
+//
 function applyArabicStyleTo(element) {
-  if (isArabic(element)) {
+  const text = element.innerText || element.textContent || "";
+  if (isArabic(text)) {
     element.classList.add("texte-arabe");
   }
 }
-
-const titleElement = document.createElement('div');
+//
+//const titleElement = document.createElement('div');
 //titleElement = exampleTitle;
-applyArabicStyleTo(titleElement);
-document.body.appendChild(titleElement);
+//applyArabicStyleTo(titleElement);
+//document.body.appendChild(titleElement);
     
 // Avant d’écrire un texte, vérifie si contient l'arabe
-function setFontAccordingToText(doc, text) {
+//function setFontAccordingToText(doc, text) {
+//  if (isArabic(text)) {
+//    doc.setFont("Amiri", "bold");  // Police arabe
+//  } else {
+//    doc.setFont("helvetica", "normal"); // Police latine classique
+//  }
+//}    
+//
+function writeTextAutoLang(doc, text, x, y, maxWidth = 180) {
   if (isArabic(text)) {
-    doc.setFont("Amiri", "bold");  // Police arabe
+    doc.setFont("Amiri", "bold");
+    const splitText = doc.splitTextToSize(text, maxWidth);
+    doc.text(splitText, x, y, { align: "right" });
   } else {
-    doc.setFont("helvetica", "normal"); // Police latine classique
+    doc.setFont("helvetica", "normal");
+    const splitText = doc.splitTextToSize(text, maxWidth);
+    doc.text(splitText, x, y);
   }
-}    
-    
+}
+
+//
 // = Application automatique à tous éléments existants
-document.querySelectorAll('div, p, span').forEach(el => {
+document.querySelectorAll('div, p, span, label, textarea').forEach(el => {
   applyArabicStyleTo(el);
 });
+
     
   </script>
 </body>
