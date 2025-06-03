@@ -309,10 +309,10 @@ doc.autoTable({
     right: 14
   },
   columnStyles: {
-    0: { cellWidth: 25 },
-    1: { cellWidth: 25 },
-    2: { cellWidth: 35 },
-    3: { cellWidth: 45 }
+    0: { cellWidth: 'auto' },
+    1: { cellWidth: 'auto' },
+    2: { cellWidth: 'auto' },
+    3: { cellWidth: 'auto' }
   }
 });
 
@@ -334,7 +334,11 @@ const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
 // ================================== Vérifiez si le texte dépasse la marge droite
       if (textWidth + marginRight > pageWidth) {
         // Si le texte dépasse, utilisez splitTextToSize pour gérer le débordement
-        const splitComments = doc.splitTextToSize(commentaires, pageWidth - 39); // 14px de chaque côté pour les marges
+    //  const splitComments = doc.splitTextToSize(commentaires, pageWidth - 39); // 14px de chaque côté pour les marges
+        const splitComments = doc.splitTextToSize(commentaires, pageWidth - 2 * marginRight);
+  
+        
+        
         doc.text(splitComments, 14, commentsYPosition);
       } else {
         doc.text(commentaires, 14, commentsYPosition);
