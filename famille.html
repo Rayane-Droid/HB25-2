@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vente de Biens</title>
+  <link rel="stylesheet" href="famille.css" />
+  <script src="dictionnaire.js" defer></script>
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+  <script src="Amiri-fonts.js"></script>
+  
+  
+  
+  <!--
+   -->
+</head>
+  
+    <!--   -->
+<body>
+  <div id="language-selection">
+    <h2 id="language-prompt">
+      🇲🇦 اختر لغتك :<br />
+      🇫🇷 Choisissez votre langue :<br />
+      🇺🇸 Choose your language:<br />
+      🇪🇸 Elija su idioma:<br />
+      🇩🇪 Wählen Sie Ihre Sprache:<br />
+      🇮🇹 Scegli la tua lingua:
+    </h2>
+    <div class="language-menu">
+      <select id="language" onchange="selectLanguage()">
+        <option value="">--</option>
+        <option value="fr">Français</option>
+        <option value="ar">العربية</option>
+        <option value="en">Anglais</option>
+        <option value="es">Espagnol</option>
+        <option value="de">Allemand</option>
+        <option value="it">Italien</option>
+      </select>
+    </div>
+  </div>
+    <!--   -->
+  <div id="user-form" class="hidden" aria-live="polite" aria-label="Formulaire utilisateur">
+    <h2 id="welcome-message">Bienvenue !</h2>
+    <div class="input-block">
+      <label id="label-username" for="username">Nom d'utilisateur :</label>
+      <input type="text" id="username" aria-required="true" />
+    </div>
+    <div class="input-block">
+      <label id="label-phone" for="phone">Numéro de téléphone :</label>
+      <input type="text" id="phone" aria-required="true" />
+    </div>
+    <button class="btn" id="btn-continue" onclick="submitUserInfo()">Continuer</button>
+  </div>
+
+  <div id="content" class="hidden" aria-live="polite" aria-label="Liste des biens disponibles">
+    <button class="btn" onclick="resetApp()" id="btn-back">Retour au menu des langues</button>
+    <h2 id="property-title">Nos biens disponibles :</h2>
+    <table id="property-table" role="table" aria-describedby="property-title">
+    <!--   -->
+      <thead>
+        <tr>
+          <th>N°</th> <!-- cells[0] -->
+          <th>Bien</th> <!-- cells[1] -->
+          <th>Superficie</th> <!-- cells[2] -->
+          <th>Prix</th> <!-- cells[3] -->
+          <th>Valider</th> <!-- cells[4] -->
+          <th>Proposition</th> <!-- cells[5] -->
+          <th>Annuler</th> <!-- cells[6] -->
+        </tr>
+      </thead>
+      <tbody id="property-body"></tbody>
+    </table>
+    <!-- Champ de commentaires -->
+    <div class="input-block">
+      <label for="comments">Commentaires :</label>
+      <textarea id="comments" rows="4" cols="50" placeholder="Laissez vos commentaires ici..."></textarea>
+    </div>
+    <br />
+    <button class="btn" onclick="saveToPDF()" id="btn-save">Enregistrer en PDF</button>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  <script>
+    // ================================== 
+    function selectLanguage() {
+      const lang = document.getElementById("language").value;
+      if (!lang) return;
+      currentLanguage = lang;
+      const t = translations[lang];
+      // ================================== Met à jour les éléments visibles et textes
+      document.getElementById("language-selection").classList.add("hidden");
+      document.getElementById("user-form").classList.remove("hidden");
+      document.getElementById("welcome-message").innerText = t.welcome;
+      document.getElementById("label-username").innerText = t.username;
+      document.getElementById("label-phone").innerText = t.phone;
+      document.getElementById("btn-continue").innerText = t.continue;
+      document.getElementById("btn-back").innerText = t.back;
+      document.getElementById("property-title").innerText = t.propertyTitle;
+      document.getElementById("btn-save").innerText = t.save;
+      // ================================== Met à jour les en-têtes du tableau
+      const tableHeaders = document.querySelectorAll("#property-table th");
+      t.tableHeaders.forEach((header, index) => {
+        tableHeaders[index].innerText = header;
+      });
+    }
+    // ================================== 
+    function submitUserInfo() {
+      const t = translations[currentLanguage];
+      const username = document.getElementById("username").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      if (!username || !phone) {
+        alert(t.fillAll);
+        return;
+      }
+      const phoneRegex = /^\+?\d{8,15}$/;
+      if (!phoneRegex.test(phone)) {
+        alert(t.invalidPhone);
+        return;
+      }
+      document.getElementById("user-form").classList.add("hidden");
+      document.getElementById("content").classList.remove("hidden");
+      generatePropertyTable();
+    }
+    // ================================== 
+    function resetApp() {
+      currentLanguage = "fr";
+      document.getElementById("language-selection").classList.remove("hidden");
+      document.getElementById("user-form").classList.add("hidden");
+      document.getElementById("content").classList.add("hidden");
+      document.getElementById("language").value = "";
+      document.getElementById("username").value = "";
+      document.getElementById("phone").value = "";
+      document.getElementById("property-body").innerHTML = "";
+    }
+    // ================================== 
+    function generatePropertyTable() {
+      const t = translations[currentLanguage];
+      const tbody = document.getElementById("property-body");
+      tbody.innerHTML = "";
+      properties.forEach((property, index) => {
+        const row = document.createElement("tr");
+        row.setAttribute("data-checked", "false");
+        const key = property.keys[currentLanguage] || property.keys.fr;
+        const title = property.titles[currentLanguage] || property.titles.fr;
+        const description = property.descriptions[currentLanguage] || property.descriptions.fr;
+        const area = property.areas[currentLanguage] || property.areas.fr;
+        const price = property.prices[currentLanguage] || property.prices.fr;
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${key}</td>
+          <td>${area}</td>
+          <td>${price}</td>
+          <td class="validate-cell"></td>
+          <td class="proposal-cell"></td>
+          <td class="cancel-cell"></td>
+        `;
+        // ================================== 
+        const validateBtn = document.createElement("button");
+        validateBtn.innerText = t.validate;
+        validateBtn.className = "btn";
+        validateBtn.onclick = () => {
+          row.querySelector(".validate-cell").innerText = row.cells[5].innerText;
+          row.querySelector(".proposal-cell").innerHTML = "";
+          row.querySelector(".cancel-cell").innerHTML = "";
+          row.setAttribute("data-checked", "true");
+        };
+        const proposeBtn = document.createElement("button");
+        proposeBtn.innerText = t.propose;
+        proposeBtn.className = "btn";
+        proposeBtn.onclick = () => {
+          const input = document.createElement("input");
+          input.type = "number";
+          input.placeholder = t.propose + " un prix";
+          input.style.width = "120px";
+          //===================================
+          const sendBtn = document.createElement("button");
+          sendBtn.innerText = t.continue;
+          sendBtn.className = "btn";
+          sendBtn.onclick = () => {
+            const value = input.value;
+            if (!value || isNaN(value)) {
+              alert(t.invalidPrice);
+              return;
+            }
+            //row.querySelector(".proposal-cell").innerText = value + " DH";
+            row.querySelector(".proposal-cell").textContent = value + " DH";
+            row.querySelector(".validate-cell").innerHTML = "";
+            row.querySelector(".cancel-cell").innerHTML = "";
+            row.setAttribute("data-checked", "true");
+          };
+          //===================================
+          const proposalCell = row.querySelector(".proposal-cell");
+          proposalCell.innerHTML = "";
+          proposalCell.appendChild(input);
+          proposalCell.appendChild(sendBtn);
+          row.querySelector(".validate-cell").innerHTML = "";
+          row.querySelector(".cancel-cell").innerHTML = "";
+        };
+        //===================================
+        const cancelBtn = document.createElement("button");
+        cancelBtn.innerText = t.cancel;
+        cancelBtn.className = "btn";
+        cancelBtn.onclick = () => {
+          row.querySelector(".cancel-cell").innerText = t.noDesire;
+          row.querySelector(".validate-cell").innerHTML = "";
+          row.querySelector(".proposal-cell").innerHTML = "";
+          row.setAttribute("data-checked", "true");
+        };
+        row.querySelector(".validate-cell").appendChild(validateBtn);
+        row.querySelector(".proposal-cell").appendChild(proposeBtn);
+        row.querySelector(".cancel-cell").appendChild(cancelBtn);
+        tbody.appendChild(row);
+      });
+    }
+    // ============ ######### =============
+
+// Enregistre la police "Amiri" avec pdfMake
+pdfMake.fonts = {
+  Amiri: {
+    normal: 'Amiri-Regular.ttf',
+    bold: 'Amiri-Bold.ttf',
+    italics: 'Amiri-Regular.ttf',
+    bolditalics: 'Amiri-Bold.ttf'
+  }
+};
+
+// Fonction saveToPDF utilisant pdfMake
+function saveToPDF() {
+  const t = translations[currentLanguage];
+  const rows = document.querySelectorAll("#property-body tr");
+
+  for (let row of rows) {
+    if (row.getAttribute("data-checked") !== "true") {
+      alert(t.actionRequired);
+      return;
+    }
+  }
+
+  const nomUtilisateur = document.getElementById("username").value || t.nameLabel + " " + "Non renseigné";
+  const telephoneUtilisateur = document.getElementById("phone").value || t.phoneLabel + " " + "Non renseigné";
+  const commentaires = document.getElementById("comments").value || "Aucun commentaire";
+
+  if (commentaires.length > 300) {
+    alert("Les commentaires ne doivent pas dépasser 300 caractères...");
+    return;
+  }
+
+  // Format date
+  const date = new Date();
+  const localeForDate = currentLanguage === "ar" ? "ar-EG" : currentLanguage + '-' + currentLanguage.toUpperCase();
+  const dateStr = date.toLocaleDateString(localeForDate, {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+
+  // Nom du fichier
+  const pad = (n) => n.toString().padStart(2, "0");
+  const filenameDate = `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}_${pad(date.getHours())}${pad(date.getMinutes())}${pad(date.getSeconds())}`;
+  const filename = `Offre_${filenameDate}.pdf`;
+
+  // Préparer les données du tableau
+  const bodyData = [];
+  rows.forEach((row) => {
+    const cells = row.querySelectorAll("td");
+    const bien = cells[1].innerText.trim();
+    const superficie = cells[2].innerText.trim();
+    const prix = cells[3].innerText.trim();
+    const choix = [4, 5, 6]
+      .map(i => cells[i].innerText.trim())
+      .find(text => text !== "") || "";
+
+    bodyData.push([bien, superficie, prix, choix]);
+  });
+
+  // Construire la définition du document pdfMake
+  const docDefinition = {
+    defaultStyle: {
+      font: 'Amiri'
+    },
+    content: [
+      { text: t.summaryTitle, style: 'header', alignment: 'center' },
+
+      { text: ` ${t.dateLabel} ${dateStr}`, style: 'info' },
+      { text: ` ${t.nameLabel} ${nomUtilisateur}`, style: 'info' },
+      { text: ` ${t.phoneLabel} ${telephoneUtilisateur}`, style: 'info' },
+
+      {
+        style: 'tableExample',
+        table: {
+          widths: ['*', '*', '*', '*'],
+          body: [
+            [
+              t.tableHeaders[1] || "Bien",
+              t.tableHeaders[2] || "Superficie",
+              t.tableHeaders[3] || "Prix",
+              t.choiceLabel || "Choix"
+            ],
+            ...bodyData
+          ]
+        },
+        layout: {
+          fillColor: function (rowIndex) {
+            return (rowIndex === 0) ? '#2980B9' : (rowIndex % 2 === 0 ? '#F0F0F0' : null);
+          }
+        }
+      },
+
+      { text: 'Commentaires:', style: 'commentsHeader', margin: [0, 15, 0, 5] },
+      { text: commentaires, style: 'comments' },
+
+      { text: t.purchaseProcedureTitle, style: 'purchaseTitle', margin: [0, 25, 0, 5] },
+      { text: t.purchaseProcedure, style: 'purchaseText' }
+    ],
+
+    styles: {
+      header: {
+        fontSize: 18,
+        bold: true
+      },
+      info: {
+        fontSize: 11,
+        bold: true,
+        margin: [0, 3, 0, 3]
+      },
+      tableExample: {
+        margin: [0, 15, 0, 0],
+        fontSize: 10
+      },
+      commentsHeader: {
+        fontSize: 11,
+        bold: true
+      },
+      comments: {
+        fontSize: 11
+      },
+      purchaseTitle: {
+        fontSize: 11,
+        bold: true,
+        italics: true
+      },
+      purchaseText: {
+        fontSize: 11,
+        italics: true
+      },
+      footer: {
+        fontSize: 8,
+        alignment: 'right',
+        margin: [0, 0, 14, 0]
+      }
+    },
+
+    footer: function (currentPage, pageCount) {
+      return {
+        text: `Page ${currentPage} / ${pageCount}`,
+        style: 'footer'
+      };
+    },
+
+    pageMargins: [14, 20, 14, 20]
+  };
+
+  // Générer le PDF avec pdfMake
+  pdfMake.createPdf(docDefinition).download(filename);
+
+  alert(`${t.pdfSaved} ${filename}`);
+  resetApp();
+}
+
+// =========================================================caracteres arab 
+function isArabic(text) {
+  return /[\u0600-\u06FF]/.test(text);
+}
+function applyArabicStyleTo(element) {
+  if (isArabic(element.textContent)) {
+    element.classList.add("texte-arabe");
+  }
+}
+// ========================================================= Application automatique à tous les éléments existants
+document.querySelectorAll('div, p, span').forEach(el => {
+  applyArabicStyleTo(el);
+});
+
+
+    
+      
+  </script>
+</body>
+</html>
