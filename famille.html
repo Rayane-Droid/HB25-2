@@ -6,15 +6,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vente de Biens</title>
+  <!--  -->
   <link rel="stylesheet" href="famille.css" />
+  <!--   -->
   <script src="dictionnaire.js" defer></script>
- 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
   <script src="Amiri-fonts.js"></script>
-   <!--  -->
+  <script src="script.js"></script>
+  
 </head>
-   <!--   -->
+   
 <body>
   <div id="language-selection">
     <h2 id="language-prompt">
@@ -211,9 +213,8 @@
         tbody.appendChild(row);
       });
     }
-    // ============ ######### =============
 
-    // Enregistre la police "Amiri" avec pdfMake
+// ================================= Enregistre la police "Amiri" avec pdfMake =================
 pdfMake.fonts = {
   Amiri: {
     normal: 'Amiri-Regular.ttf',
@@ -223,7 +224,7 @@ pdfMake.fonts = {
   }
 };
 
-// Fonction saveToPDF utilisant pdfMake
+// ================= Fonction saveToPDF utilisant pdfMake =================
 function saveToPDF() {
   const t = translations[currentLanguage];
   const rows = document.querySelectorAll("#property-body tr");
@@ -238,29 +239,28 @@ function saveToPDF() {
   const nomUtilisateur = document.getElementById("username").value || `${t.nameLabel} Non renseigné`;
   const telephoneUtilisateur = document.getElementById("phone").value || `${t.phoneLabel} Non renseigné`;
   const commentaires = document.getElementById("comments").value || "Aucun commentaire";
-
+  // -------------------------- Format date ------------------------------
   if (commentaires.length > 300) {
     alert("Les commentaires ne doivent pas dépasser 300 caractères...");
     return;
   }
 
-  // Format date
+  // ------------------------------ Format date ------------------------------
   const formatDate = (date, locale) => date.toLocaleDateString(locale, {
     year: "numeric",
     month: "long",
     day: "numeric"
   });
-
   const date = new Date();
   const localeForDate = currentLanguage === "ar" ? "ar-EG" : `${currentLanguage}-${currentLanguage.toUpperCase()}`;
   const dateStr = formatDate(date, localeForDate);
 
-  // Nom du fichier
+  // ------------------------------ Nom du fichier ------------------------------
   const pad = n => n.toString().padStart(2, "0");
   const filenameDate = `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}_${pad(date.getHours())}${pad(date.getMinutes())}${pad(date.getSeconds())}`;
   const filename = `Offre_${filenameDate}.pdf`;
 
-  // Préparer les données du tableau
+  // ------------------------------ Préparer les données du tableau ------------------------------
   const bodyData = [];
   rows.forEach(row => {
     const cells = row.querySelectorAll("td");
@@ -272,13 +272,13 @@ function saveToPDF() {
     bodyData.push([bien, superficie, prix, choix]);
   });
 
-  // Fonction pour inverser l'ordre des mots dans un titre arabe (exemple simplifié)
+  // ------------------------------ Fonction pour inverser l'ordre des mots dans un titre arabe (exemple simplifié) ------------------------------
   function fixArabicTitle(title) {
     // Séparer les mots, inverser l'ordre, puis recombiner
     return title.split(' ').reverse().join(' ');
   }
 
-  // Construire la définition du document pdfMake
+  // ------------------------------ Construire la définition du document pdfMake ------------------------------
   const docDefinition = {
     defaultStyle: {
       font: 'Amiri',
@@ -312,16 +312,7 @@ function saveToPDF() {
       },
 
       { text: 'Commentaires:', style: 'commentsHeader', margin: [0, 15, 0, 5], alignment: currentLanguage === 'ar' ? 'right' : 'left' },
-
-
-      
-  //  { text: commentaires, style: 'comments', alignment: currentLanguage === 'ar' ? 'right' : 'left' },
-
       { text: commentaires, style: 'comments', alignment: isArabic(commentaires) ? 'right' : 'left', dir: isArabic(commentaires) ? 'rtl' : 'ltr' },
-      
-
-      
-
       { text: t.purchaseProcedureTitle, style: 'purchaseTitle', margin: [0, 25, 0, 5], alignment: currentLanguage === 'ar' ? 'right' : 'left' },
       { text: t.purchaseProcedure, style: 'purchaseText', alignment: currentLanguage === 'ar' ? 'right' : 'left' }
     ],
@@ -345,14 +336,14 @@ function saveToPDF() {
     pageMargins: [14, 20, 14, 20]
   };
 
-  // Générer le PDF avec pdfMake
+  // ====================================== Générer le PDF avec pdfMake ====================================
   pdfMake.createPdf(docDefinition).download(filename);
 
   alert(`${t.pdfSaved} ${filename}`);
   resetApp();
 }
 
-// =========================================================caracteres arab
+// =========================================================caracteres arab ============================
 function isArabic(text) {
   return /[\u0600-\u06FF]/.test(text);
 }
@@ -366,8 +357,6 @@ document.querySelectorAll('div, p, span').forEach(el => {
   applyArabicStyleTo(el);
 });
 
-    
-      
   </script>
 </body>
 </html>
