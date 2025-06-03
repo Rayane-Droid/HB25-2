@@ -1,13 +1,1 @@
-@font-face {
-  font-family: 'Amiri';
-  src: url('fonts/Amiri-normal.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
 
-.texte-arabe {
-  font-family: 'Amiri', serif;
-  direction: rtl;
-  unicode-bidi: embed;
-  text-align: right;
-}
