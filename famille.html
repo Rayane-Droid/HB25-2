@@ -281,8 +281,13 @@
     doc.autoTable({
   startY: 55,
   head: [
-    [t.tableHeaders[1], t.tableHeaders[2], t.tableHeaders[3], "Choix"]
-  ],
+  //  [t.tableHeaders[1], t.tableHeaders[2], t.tableHeaders[3], "Choix"]
+  
+
+
+const tableHeaderRow = [t.tableHeaders[1] || "Bien", t.tableHeaders[2] || "Superficie", t.tableHeaders[3] || "Prix", t.choiceLabel || "Choix"];
+
+      ],
   body: bodyData,
   styles: {
     font: "Amiri",
@@ -359,23 +364,11 @@ const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
    function isArabic(text) {
   return /[\u0600-\u06FF]/.test(text);
 }
-   // 
-//function applyArabicStyleTo(element) {
- // if (isArabic(element)) {
-  //  element.classList.add("texte-arabe");
-//  }
-//}
-//
     function applyArabicStyleTo(element) {
   if (isArabic(element.textContent)) {
     element.classList.add("texte-arabe");
   }
     }
-    //
-//const titleElement = document.createElement('div');
-//titleElement = exampleTitle;
-//applyArabicStyleTo(titleElement);
-//document.body.appendChild(titleElement);
 // ========================================================= Application automatique à tous les éléments existants
 document.querySelectorAll('div, p, span').forEach(el => {
   applyArabicStyleTo(el);
