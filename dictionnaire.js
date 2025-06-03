@@ -1,3 +1,5 @@
+const currentLanguage = "fr";
+
 const generalTranslations = {
   commentsLabel: {
     fr: "Commentaires :",
@@ -259,7 +261,7 @@ const properties = [
   }
 ];
 
-let currentLanguage = "fr";
+//let currentLanguage = "fr";
 
 const translations = {
   fr: {
@@ -545,5 +547,6 @@ const translations = {
   }
 };
 
-
-
+// Mise à jour du label et placeholder
+//document.getElementById("comment-label").innerText = generalTranslations.commentsLabel[currentLanguage];
+//document.getElementById("comments").placeholder = generalTranslations.placeholder[currentLanguage];
