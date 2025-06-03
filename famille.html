@@ -8,16 +8,21 @@
   <title>Vente de Biens</title>
   <link rel="stylesheet" href="famille.css" />
   <script src="dictionnaire.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/gh/Rayane-Droid/famille/amiri.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js" defer></script>
 
   <!-- Amiri via Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet" />
 
+<!--   
   <link rel="preload" href="Amiri-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <script src="amiri-font.js"></script>
-    
+  <script src="amiri-font.js"></script> 
+  <script src="https://cdn.jsdelivr.net/gh/Rayane-Droid/famille/amiri.js" defer></script>
+  -->
+  
+  <script src="Amiri-normal.js"></script>
+  <script src="Amiri-bold.js"></script>
+  
 </head>
   
     <!--   -->
@@ -365,7 +370,21 @@ const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
       document.getElementById("language-selection").classList.remove("hidden");
     });
 // =========================================================caracteres arab 
-   function isArabic(text) {
+  
+    // Enregistre la police "Amiri"
+jsPDF.API.events.push(['addFonts', function () {
+  this.addFileToVFS("Amiri-Regular.ttf", amiriNormal); // variable générée par le fichier .js
+  this.addFont("Amiri-Regular.ttf", "Amiri", "normal");
+
+  this.addFileToVFS("Amiri-Bold.ttf", amiriBold); // variable générée par l'autre fichier
+  this.addFont("Amiri-Bold.ttf", "Amiri", "bold");
+}]);
+
+    
+    
+    
+   // 
+    function isArabic(text) {
   return /[\u0600-\u06FF]/.test(text);
 }
     function applyArabicStyleTo(element) {
