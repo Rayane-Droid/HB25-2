@@ -19,9 +19,7 @@
   <script src="amiri-font.js"></script>
     
 </head>
-
-<style>
-</style>
+  
     <!--   -->
 <body>
   <div id="language-selection">
@@ -219,8 +217,7 @@
         tbody.appendChild(row);
       });
     }
-    // ================================== Amélioration UX : désactiver les boutons après action
-     // ================================== Amélioration UX : désactiver les boutons après action
+    // =========================
     function saveToPDF() {
       const t = translations[currentLanguage];
       const rows = document.querySelectorAll("#property-body tr");
@@ -274,26 +271,12 @@
         const superficie = cells[2].innerText.trim();
         const prix = cells[3].innerText.trim();
         // ================================== Choix (valider, proposer, annuler)
-      //  let choix = "";
-    //    if (cells[4].innerText.trim()) choix = cells[4].innerText.trim();
-     //   else if (cells[5].innerText.trim()) choix = cells[5].innerText.trim();
-   //     else if (cells[6].innerText.trim()) choix = cells[6].innerText.trim();
-     
-        
         const choix = [4, 5, 6]
   .map(i => cells[i].innerText.trim())
   .find(text => text !== "") || "";
         
         bodyData.push([bien, superficie, prix, choix]);
       });
-
-
-
-
-
-
-      
-
 // ================================== Générer le tableau avec autoTable
     doc.autoTable({
   startY: 55,
@@ -391,9 +374,6 @@ document.body.appendChild(titleElement);
 document.querySelectorAll('div, p, span').forEach(el => {
   applyArabicStyleTo(el);
 });
-    
-    
   </script>
 </body>
-
 </html>
