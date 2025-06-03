@@ -278,16 +278,18 @@
         bodyData.push([bien, superficie, prix, choix]);
       });
 // ================================== Générer le tableau avec autoTable
-    doc.autoTable({
+    // Déclare le tableau des en-têtes en dehors de doc.autoTable
+const tableHeaderRow = [
+  t.tableHeaders[1] || "Bien",
+  t.tableHeaders[2] || "Superficie",
+  t.tableHeaders[3] || "Prix",
+  t.choiceLabel || "Choix"
+];
+
+// Appelle doc.autoTable avec les bons paramètres
+doc.autoTable({
   startY: 55,
-  head: [
-  //  [t.tableHeaders[1], t.tableHeaders[2], t.tableHeaders[3], "Choix"]
-  
-
-
-const tableHeaderRow = [t.tableHeaders[1] || "Bien", t.tableHeaders[2] || "Superficie", t.tableHeaders[3] || "Prix", t.choiceLabel || "Choix"];
-
-      ],
+  head: [tableHeaderRow],
   body: bodyData,
   styles: {
     font: "Amiri",
@@ -315,6 +317,8 @@ const tableHeaderRow = [t.tableHeaders[1] || "Bien", t.tableHeaders[2] || "Super
 });
 
 const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
+
+  
 // ================================== Ajout des commentaires au PDF
       doc.setFontSize(11);
      //doc.setFont("helvetica", "normal");
