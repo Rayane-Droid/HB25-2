@@ -357,7 +357,11 @@ const translations = {
     invalidPrice: "سعر غير صالح.",
     actionRequired: "يرجى اختيار إجراء لكل عقار.",
     pdfSaved: "تم حفظ ملف PDF باسم:",
-    purchaseProcedureTitle: "إجراءات الشراء:",
+ //   purchaseProcedureTitle: "إجراءات الشراء:",
+    purchaseProcedureTitle: "\u200Fإجراءات الشراء:",
+
+
+    
     purchaseProcedure:
       "1. تحقق من العقارات والاختيارات في الجدول.\n" +
       "2. اتصل بقسم المبيعات لدينا على الرقم المذكور.\n" +
