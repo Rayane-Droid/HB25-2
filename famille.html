@@ -12,14 +12,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
   <script src="Amiri-fonts.js"></script>
-  
-  
-  
-  <!--
-   -->
+   <!--  -->
 </head>
-  
-    <!--   -->
+   <!--   -->
 <body>
   <div id="language-selection">
     <h2 id="language-prompt">
@@ -218,7 +213,7 @@
     }
     // ============ ######### =============
 
-// Enregistre la police "Amiri" avec pdfMake
+    // Enregistre la police "Amiri" avec pdfMake
 pdfMake.fonts = {
   Amiri: {
     normal: 'Amiri-Regular.ttf',
@@ -277,13 +272,21 @@ function saveToPDF() {
     bodyData.push([bien, superficie, prix, choix]);
   });
 
+  // Fonction pour inverser l'ordre des mots dans un titre arabe (exemple simplifié)
+  function fixArabicTitle(title) {
+    // Séparer les mots, inverser l'ordre, puis recombiner
+    return title.split(' ').reverse().join(' ');
+  }
+
   // Construire la définition du document pdfMake
   const docDefinition = {
     defaultStyle: {
-      font: 'Amiri'
+      font: 'Amiri',
+      alignment: currentLanguage === 'ar' ? 'right' : 'left',  // aligner tout le texte selon la langue
+      direction: currentLanguage === 'ar' ? 'rtl' : 'ltr'     // direction droite à gauche pour arabe
     },
     content: [
-      { text: t.summaryTitle, style: 'header', alignment: 'center' },
+      { text: t.summaryTitle, style: 'header', alignment: 'center', direction: currentLanguage === 'ar' ? 'rtl' : 'ltr' },
 
       { text: ` ${t.dateLabel} ${dateStr}`, style: 'info' },
       { text: ` ${t.nameLabel} ${nomUtilisateur}`, style: 'info' },
@@ -295,12 +298,12 @@ function saveToPDF() {
           widths: ['*', '*', '*', '*'],
           body: [
             [
-              t.tableHeaders[1] || "Bien",
-              t.tableHeaders[2] || "Superficie",
-              t.tableHeaders[3] || "Prix",
-              t.choiceLabel || "Choix"
+              { text: currentLanguage === 'ar' ? fixArabicTitle(t.tableHeaders[1] || "Bien") : (t.tableHeaders[1] || "Bien"), alignment: 'center' },
+              { text: currentLanguage === 'ar' ? fixArabicTitle(t.tableHeaders[2] || "Superficie") : (t.tableHeaders[2] || "Superficie"), alignment: 'center' },
+              { text: currentLanguage === 'ar' ? fixArabicTitle(t.tableHeaders[3] || "Prix") : (t.tableHeaders[3] || "Prix"), alignment: 'center' },
+              { text: currentLanguage === 'ar' ? fixArabicTitle(t.choiceLabel || "Choix") : (t.choiceLabel || "Choix"), alignment: 'center' }
             ],
-            ...bodyData
+            ...bodyData.map(row => row.map(cell => ({ text: cell, alignment: currentLanguage === 'ar' ? 'right' : 'left' })))
           ]
         },
         layout: {
@@ -308,11 +311,11 @@ function saveToPDF() {
         }
       },
 
-      { text: 'Commentaires:', style: 'commentsHeader', margin: [0, 15, 0, 5] },
-      { text: commentaires, style: 'comments' },
+      { text: 'Commentaires:', style: 'commentsHeader', margin: [0, 15, 0, 5], alignment: currentLanguage === 'ar' ? 'right' : 'left' },
+      { text: commentaires, style: 'comments', alignment: currentLanguage === 'ar' ? 'right' : 'left' },
 
-      { text: t.purchaseProcedureTitle, style: 'purchaseTitle', margin: [0, 25, 0, 5] },
-      { text: t.purchaseProcedure, style: 'purchaseText' }
+      { text: t.purchaseProcedureTitle, style: 'purchaseTitle', margin: [0, 25, 0, 5], alignment: currentLanguage === 'ar' ? 'right' : 'left' },
+      { text: t.purchaseProcedure, style: 'purchaseText', alignment: currentLanguage === 'ar' ? 'right' : 'left' }
     ],
 
     styles: {
@@ -355,7 +358,6 @@ document.querySelectorAll('div, p, span').forEach(el => {
   applyArabicStyleTo(el);
 });
 
-    
     
       
   </script>
