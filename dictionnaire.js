@@ -1,3 +1,30 @@
+const generalTranslations = {
+  commentsLabel: {
+    fr: "Commentaires :",
+    en: "Comments:",
+    ar: "تعليقات:",
+    es: "Comentarios:",
+    de: "Kommentare:",
+    it: "Commenti:"
+  },
+  noComment: {
+    fr: "Aucun commentaire",
+    en: "No comment",
+    ar: "لا يوجد تعليق",
+    es: "Sin comentario",
+    de: "Kein Kommentar",
+    it: "Nessun commento"
+  },
+  choice: {
+    fr: "Choix",
+    en: "Choice",
+    ar: "اختيار",
+    es: "Elección",
+    de: "Auswahl",
+    it: "Scelta"
+  }
+};
+
 
 const properties = [
   {
