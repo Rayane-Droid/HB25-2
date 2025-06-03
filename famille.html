@@ -84,13 +84,13 @@
   </div>
   
   <script>
-    // ================================== 
+      // ================================== selection de la langue ==================================== 
     function selectLanguage() {
       const lang = document.getElementById("language").value;
       if (!lang) return;
       currentLanguage = lang;
       const t = translations[lang];
-      // ================================== Met à jour les éléments visibles et textes
+      // ================================== Met à jour les éléments visibles et textes ================ 
       document.getElementById("language-selection").classList.add("hidden");
       document.getElementById("user-form").classList.remove("hidden");
       document.getElementById("welcome-message").innerText = t.welcome;
@@ -100,7 +100,7 @@
       document.getElementById("btn-back").innerText = t.back;
       document.getElementById("property-title").innerText = t.propertyTitle;
       document.getElementById("btn-save").innerText = t.save;
-      // ================================== Met à jour les en-têtes du tableau
+      // ================================== Met à jour les en-têtes du tableau ========================
       const tableHeaders = document.querySelectorAll("#property-table th");
       t.tableHeaders.forEach((header, index) => {
         tableHeaders[index].innerText = header;
