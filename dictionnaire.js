@@ -24,7 +24,7 @@ const generalTranslations = {
     es: "Deja tus comentarios aquí...",
     de: "Hinterlassen Sie hier Ihre Kommentare...",
     it: "Lascia qui i tuoi commenti..."
-  }
+  },
   choice: {
     fr: "Choix",
     en: "Choice",
