@@ -386,6 +386,15 @@ jsPDF.API.events.push(['addFonts', function () {
 document.querySelectorAll('div, p, span').forEach(el => {
   applyArabicStyleTo(el);
 });
+
+window.jspdf.jsPDF.API.events.push(['addFonts', function () {
+  this.addFileToVFS("Amiri-Regular.ttf", amiriNormal);
+  this.addFont("Amiri-Regular.ttf", "Amiri", "normal");
+  this.addFileToVFS("Amiri-Bold.ttf", amiriBold);
+  this.addFont("Amiri-Bold.ttf", "Amiri", "bold");
+}]);
+
+    
   </script>
 </body>
 </html>
