@@ -274,12 +274,26 @@
         const superficie = cells[2].innerText.trim();
         const prix = cells[3].innerText.trim();
         // ================================== Choix (valider, proposer, annuler)
-        let choix = "";
-        if (cells[4].innerText.trim()) choix = cells[4].innerText.trim();
-        else if (cells[5].innerText.trim()) choix = cells[5].innerText.trim();
-        else if (cells[6].innerText.trim()) choix = cells[6].innerText.trim();
+      //  let choix = "";
+    //    if (cells[4].innerText.trim()) choix = cells[4].innerText.trim();
+     //   else if (cells[5].innerText.trim()) choix = cells[5].innerText.trim();
+   //     else if (cells[6].innerText.trim()) choix = cells[6].innerText.trim();
+     
+        
+        const choix = [4, 5, 6]
+  .map(i => cells[i].innerText.trim())
+  .find(text => text !== "") || "";
+        
         bodyData.push([bien, superficie, prix, choix]);
       });
+
+
+
+
+
+
+      
+
 // ================================== Générer le tableau avec autoTable
     doc.autoTable({
   startY: 55,
