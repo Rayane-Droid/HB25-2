@@ -331,14 +331,10 @@ const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
       const marginRight = 14; // Marge droite
       const pageWidth = doc.internal.pageSize.getWidth();
       const textWidth = doc.getTextDimensions(commentaires).w;
-// ================================== Vérifiez si le texte dépasse la marge droite
+      // ================================== Vérifiez si le texte dépasse la marge droite
       if (textWidth + marginRight > pageWidth) {
         // Si le texte dépasse, utilisez splitTextToSize pour gérer le débordement
-    //  const splitComments = doc.splitTextToSize(commentaires, pageWidth - 39); // 14px de chaque côté pour les marges
         const splitComments = doc.splitTextToSize(commentaires, pageWidth - 2 * marginRight);
-  
-        
-        
         doc.text(splitComments, 14, commentsYPosition);
       } else {
         doc.text(commentaires, 14, commentsYPosition);
