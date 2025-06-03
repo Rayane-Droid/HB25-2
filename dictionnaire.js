@@ -15,6 +15,14 @@ const generalTranslations = {
     de: "Kein Kommentar",
     it: "Nessun commento"
   },
+  placeholder: {
+    fr: "Laissez vos commentaires ici...",
+    en: "Leave your comments here...",
+    ar: "اترك تعليقاتك هنا...",
+    es: "Deja tus comentarios aquí...",
+    de: "Hinterlassen Sie hier Ihre Kommentare...",
+    it: "Lascia qui i tuoi commenti..."
+  }
   choice: {
     fr: "Choix",
     en: "Choice",
