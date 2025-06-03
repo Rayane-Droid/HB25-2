@@ -1,4 +1,4 @@
-const currentLanguage = "fr";
+//const currentLanguage = "fr";
 
 const generalTranslations = {
   commentsLabel: {
@@ -261,7 +261,7 @@ const properties = [
   }
 ];
 
-//let currentLanguage = "fr";
+let currentLanguage = "fr";
 
 const translations = {
   fr: {
