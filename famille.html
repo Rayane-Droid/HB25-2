@@ -233,15 +233,15 @@ function saveToPDF() {
   const t = translations[currentLanguage];
   const rows = document.querySelectorAll("#property-body tr");
 
-  for (let row of rows) {
+  for (const row of rows) {
     if (row.getAttribute("data-checked") !== "true") {
       alert(t.actionRequired);
       return;
     }
   }
 
-  const nomUtilisateur = document.getElementById("username").value || t.nameLabel + " " + "Non renseigné";
-  const telephoneUtilisateur = document.getElementById("phone").value || t.phoneLabel + " " + "Non renseigné";
+  const nomUtilisateur = document.getElementById("username").value || `${t.nameLabel} Non renseigné`;
+  const telephoneUtilisateur = document.getElementById("phone").value || `${t.phoneLabel} Non renseigné`;
   const commentaires = document.getElementById("comments").value || "Aucun commentaire";
 
   if (commentaires.length > 300) {
@@ -250,29 +250,29 @@ function saveToPDF() {
   }
 
   // Format date
-  const date = new Date();
-  const localeForDate = currentLanguage === "ar" ? "ar-EG" : currentLanguage + '-' + currentLanguage.toUpperCase();
-  const dateStr = date.toLocaleDateString(localeForDate, {
+  const formatDate = (date, locale) => date.toLocaleDateString(locale, {
     year: "numeric",
     month: "long",
     day: "numeric"
   });
 
+  const date = new Date();
+  const localeForDate = currentLanguage === "ar" ? "ar-EG" : `${currentLanguage}-${currentLanguage.toUpperCase()}`;
+  const dateStr = formatDate(date, localeForDate);
+
   // Nom du fichier
-  const pad = (n) => n.toString().padStart(2, "0");
+  const pad = n => n.toString().padStart(2, "0");
   const filenameDate = `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}_${pad(date.getHours())}${pad(date.getMinutes())}${pad(date.getSeconds())}`;
   const filename = `Offre_${filenameDate}.pdf`;
 
   // Préparer les données du tableau
   const bodyData = [];
-  rows.forEach((row) => {
+  rows.forEach(row => {
     const cells = row.querySelectorAll("td");
     const bien = cells[1].innerText.trim();
     const superficie = cells[2].innerText.trim();
     const prix = cells[3].innerText.trim();
-    const choix = [4, 5, 6]
-      .map(i => cells[i].innerText.trim())
-      .find(text => text !== "") || "";
+    const choix = [4, 5, 6].map(i => cells[i].innerText.trim()).find(text => text !== "") || "";
 
     bodyData.push([bien, superficie, prix, choix]);
   });
@@ -304,9 +304,7 @@ function saveToPDF() {
           ]
         },
         layout: {
-          fillColor: function (rowIndex) {
-            return (rowIndex === 0) ? '#2980B9' : (rowIndex % 2 === 0 ? '#F0F0F0' : null);
-          }
+          fillColor: rowIndex => (rowIndex === 0) ? '#2980B9' : (rowIndex % 2 === 0 ? '#F0F0F0' : null)
         }
       },
 
@@ -318,48 +316,20 @@ function saveToPDF() {
     ],
 
     styles: {
-      header: {
-        fontSize: 18,
-        bold: true
-      },
-      info: {
-        fontSize: 11,
-        bold: true,
-        margin: [0, 3, 0, 3]
-      },
-      tableExample: {
-        margin: [0, 15, 0, 0],
-        fontSize: 10
-      },
-      commentsHeader: {
-        fontSize: 11,
-        bold: true
-      },
-      comments: {
-        fontSize: 11
-      },
-      purchaseTitle: {
-        fontSize: 11,
-        bold: true,
-        italics: true
-      },
-      purchaseText: {
-        fontSize: 11,
-        italics: true
-      },
-      footer: {
-        fontSize: 8,
-        alignment: 'right',
-        margin: [0, 0, 14, 0]
-      }
+      header: { fontSize: 18, bold: true },
+      info: { fontSize: 11, bold: true, margin: [0, 3, 0, 3] },
+      tableExample: { margin: [0, 15, 0, 0], fontSize: 10 },
+      commentsHeader: { fontSize: 11, bold: true },
+      comments: { fontSize: 11 },
+      purchaseTitle: { fontSize: 11, bold: true, italics: true },
+      purchaseText: { fontSize: 11, italics: true },
+      footer: { fontSize: 8, alignment: 'right', margin: [0, 0, 14, 0] }
     },
 
-    footer: function (currentPage, pageCount) {
-      return {
-        text: `Page ${currentPage} / ${pageCount}`,
-        style: 'footer'
-      };
-    },
+    footer: (currentPage, pageCount) => ({
+      text: `Page ${currentPage} / ${pageCount}`,
+      style: 'footer'
+    }),
 
     pageMargins: [14, 20, 14, 20]
   };
@@ -371,7 +341,7 @@ function saveToPDF() {
   resetApp();
 }
 
-// =========================================================caracteres arab 
+// =========================================================caracteres arab
 function isArabic(text) {
   return /[\u0600-\u06FF]/.test(text);
 }
@@ -385,7 +355,7 @@ document.querySelectorAll('div, p, span').forEach(el => {
   applyArabicStyleTo(el);
 });
 
-
+    
     
       
   </script>
