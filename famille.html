@@ -312,7 +312,15 @@ function saveToPDF() {
       },
 
       { text: 'Commentaires:', style: 'commentsHeader', margin: [0, 15, 0, 5], alignment: currentLanguage === 'ar' ? 'right' : 'left' },
-      { text: commentaires, style: 'comments', alignment: currentLanguage === 'ar' ? 'right' : 'left' },
+
+
+      
+  //  { text: commentaires, style: 'comments', alignment: currentLanguage === 'ar' ? 'right' : 'left' },
+
+      { text: commentaires, style: 'comments', alignment: isArabic(commentaires) ? 'right' : 'left', dir: isArabic(commentaires) ? 'rtl' : 'ltr' },
+      
+
+      
 
       { text: t.purchaseProcedureTitle, style: 'purchaseTitle', margin: [0, 25, 0, 5], alignment: currentLanguage === 'ar' ? 'right' : 'left' },
       { text: t.purchaseProcedure, style: 'purchaseText', alignment: currentLanguage === 'ar' ? 'right' : 'left' }
