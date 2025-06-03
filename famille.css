@@ -123,7 +123,7 @@ th {
 
 @font-face {
   font-family: 'Amiri';
-  src: url('fonts/Amiri-Regular.ttf') format('truetype');
+  src: url('fonts/Amiri-normal.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
