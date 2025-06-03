@@ -366,16 +366,13 @@ const lastY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100;
   
     // Enregistre la police "Amiri"
 jsPDF.API.events.push(['addFonts', function () {
-  this.addFileToVFS("Amiri-Regular.ttf", amiriNormal); // variable générée par le fichier .js
-  this.addFont("Amiri-Regular.ttf", "Amiri", "normal");
+  this.addFileToVFS("Amiri-normal.ttf", amiriNormal); // variable générée par le fichier .js
+  this.addFont("Amiri-normal.ttf", "Amiri", "normal");
 
   this.addFileToVFS("Amiri-Bold.ttf", amiriBold); // variable générée par l'autre fichier
   this.addFont("Amiri-Bold.ttf", "Amiri", "bold");
 }]);
 
-    
-    
-    
    // 
     function isArabic(text) {
   return /[\u0600-\u06FF]/.test(text);
