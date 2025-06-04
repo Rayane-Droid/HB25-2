@@ -375,12 +375,8 @@ const translations = {
     tableHeaders: [
       "رقم",
       "العقار",
-      //    "العنوان",
-      //    "الوصف",
       "المساحة",
       "السعر",
-      //     "صورة",
-      //    "فيديو",
       "تأكيد",
       "اقتراح",
       "إلغاء"
@@ -394,7 +390,7 @@ const translations = {
     invalidPrice: "سعر غير صالح.",
     actionRequired: "يرجى اختيار إجراء لكل عقار.",
     pdfSaved: "تم حفظ ملف PDF باسم:",
-    purchaseProcedureTitle: "إجراءات الشراء:",  
+    purchaseProcedureTitle: "إجراءات الشراء:",
     purchaseProcedure:
       "1. تحقق من العقارات والاختيارات في الجدول.\n" +
       "2. اتصل بقسم المبيعات لدينا على الرقم المذكور.\n" +
@@ -402,9 +398,9 @@ const translations = {
       "4. ستتلقى رسالة تأكيد عبر البريد الإلكتروني مع التفاصيل.\n" +
       "شكراً لثقتك.",
     summaryTitle: "ملخص الاختيارات",
-    nameLabel: ": الاسم",
-    phoneLabel: ": الهاتف",
-    dateLabel: ": تاريخ الإدخال",
+    nameLabel: "الاسم:",
+    phoneLabel: "الهاتف:",
+    dateLabel: "تاريخ الإدخال:",
     photoText: "صورة",
     videoText: "فيديو"
   },
