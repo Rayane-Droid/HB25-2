@@ -1,6 +1,5 @@
 
 
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -29,7 +28,7 @@
       <img src="https://rayane-droid.github.io/HB25-3/Drapeau-anglais.png" alt="EN" style="width: 20px; vertical-align: middle;" /> Choose your language <br />
       <img src="https://rayane-droid.github.io/HB25-3/Drapeau-espagnol.png" alt="ES" style="width: 20px; vertical-align: middle;" /> Elija su idioma <br />
       <img src="https://rayane-droid.github.io/HB25-3/Drapeau-allemagne.png" alt="DE" style="width: 20px; vertical-align: middle;" /> Wählen Sie Ihre Sprache <br />
-      <img src="https://rayane-droid.github.io/HB25-3/Drapeau-italie.png" alt="IT" style="width: 20px; vertical-align: middle;" /> Scegli la tua lingua 
+      <img src="https://rayane-droid.github.io/HB25-3/Drapeau-italie.png" alt="IT" style="width: 20px; vertical-align: middle;" /> Scegli la tua lingua
     </h2>
 
     <div class="language-menu">
@@ -78,100 +77,81 @@
     </table>
 
     <!-- Champ de commentaire -->
-<div class="input-block">
-  <label id="commentsLabel" for="comments">Commentaires :</label>
-  <textarea id="comments" rows="4" cols="50" placeholder="Laissez vos commentaires ici..."></textarea>
-</div>
+    <div class="input-block">
+      <label id="commentsLabel" for="comments">Commentaires :</label>
+      <textarea id="comments" rows="4" cols="50" placeholder="Laissez vos commentaires ici..."></textarea>
+    </div>
     <!--  -->
     <br />
     <button class="btn" onclick="saveToPDF()" id="btn-save">Enregistrer en PDF</button>
   </div>
 
   <script>
-    
     function updateCommentsSection(lang) {
-    const textarea = document.getElementById("comments");
-    const label = document.getElementById("commentsLabel");
-
-    // Mise à jour du placeholder
-    if (generalTranslations.placeholder[lang]) {
-      textarea.placeholder = generalTranslations.placeholder[lang];
+      const textarea = document.getElementById("comments");
+      const label = document.getElementById("commentsLabel");
+      // Mise à jour du placeholder
+      if (generalTranslations.placeholder[lang]) {
+        textarea.placeholder = generalTranslations.placeholder[lang];
+      }
+      // Mise à jour du label
+      if (generalTranslations.commentsLabel[lang]) {
+        label.textContent = generalTranslations.commentsLabel[lang];
+      }
     }
-
-    // Mise à jour du label
-    if (generalTranslations.commentsLabel[lang]) {
-      label.textContent = generalTranslations.commentsLabel[lang];
-    }
-  }
-
-  // Appliquer la langue par défaut (français)
-  updateCommentsSection("fr");
-
-  // Écouteur d'événement sur le sélecteur
-    document.getElementById("language").addEventListener("change", function () {
-    updateCommentsSection(this.value);
-  });
-    
-    
+    // Appliquer la langue par défaut (français)
+    updateCommentsSection("fr");
+    // Écouteur d'événement sur le sélecteur
+    document.getElementById("language").addEventListener("change", function() {
+      updateCommentsSection(this.value);
+    });
     // ===== selection de la langue =================== 
-    
-   function selectLanguage() {
-  const lang = document.getElementById("language").value;
-  if (!lang) return;
-  currentLanguage = lang;
-  const t = translations[lang];
-
-  // Mise à jour des champs commentaires
-  updateCommentsSection(lang);    
-
-  // Mise à jour des textes
-  document.getElementById("language-selection").classList.add("hidden");
-  document.getElementById("user-form").classList.remove("hidden");
-  document.getElementById("welcome-message").innerText = t.welcome;
-  document.getElementById("label-username").innerText = t.username;
-  document.getElementById("label-phone").innerText = t.phone;
-  document.getElementById("btn-continue").innerText = t.continue;
-  document.getElementById("btn-back").innerText = t.back;
-  document.getElementById("property-title").innerText = t.propertyTitle;
-  document.getElementById("btn-save").innerText = t.save;
-
-  // Mise à jour des en-têtes du tableau
-  const tableHeaders = document.querySelectorAll("#property-table th");
-  t.tableHeaders.forEach((header, index) => {
-    tableHeaders[index].innerText = header;
-  });
-
-  // === Gère la direction RTL pour l'arabe ===
-  const form = document.getElementById("user-form");
-  const content = document.getElementById("content");
-  const table = document.getElementById("property-table");
-
-  if (lang === "ar") {
-    form.classList.add("rtl");
-    form.style.direction = "rtl";
-    form.style.textAlign = "right";
-
-    content.classList.add("rtl");
-    content.style.direction = "rtl";
-    content.style.textAlign = "right";
-
-    table.classList.add("rtl-table");
-    table.setAttribute("dir", "rtl");
-
-  } else {
-    form.classList.remove("rtl");
-    form.style.direction = "ltr";
-    form.style.textAlign = "left";
-
-    content.classList.remove("rtl");
-    content.style.direction = "ltr";
-    content.style.textAlign = "left";
-
-    table.classList.remove("rtl-table");
-    table.removeAttribute("dir");
-  }
-}
-
+    function selectLanguage() {
+      const lang = document.getElementById("language").value;
+      if (!lang) return;
+      currentLanguage = lang;
+      const t = translations[lang];
+      // Mise à jour des champs commentaires
+      updateCommentsSection(lang);
+      // Mise à jour des textes
+      document.getElementById("language-selection").classList.add("hidden");
+      document.getElementById("user-form").classList.remove("hidden");
+      document.getElementById("welcome-message").innerText = t.welcome;
+      document.getElementById("label-username").innerText = t.username;
+      document.getElementById("label-phone").innerText = t.phone;
+      document.getElementById("btn-continue").innerText = t.continue;
+      document.getElementById("btn-back").innerText = t.back;
+      document.getElementById("property-title").innerText = t.propertyTitle;
+      document.getElementById("btn-save").innerText = t.save;
+      // Mise à jour des en-têtes du tableau
+      const tableHeaders = document.querySelectorAll("#property-table th");
+      t.tableHeaders.forEach((header, index) => {
+        tableHeaders[index].innerText = header;
+      });
+      // === Gère la direction RTL pour l'arabe ===
+      const form = document.getElementById("user-form");
+      const content = document.getElementById("content");
+      const table = document.getElementById("property-table");
+      if (lang === "ar") {
+        form.classList.add("rtl");
+        form.style.direction = "rtl";
+        form.style.textAlign = "right";
+        content.classList.add("rtl");
+        content.style.direction = "rtl";
+        content.style.textAlign = "right";
+        table.classList.add("rtl-table");
+        table.setAttribute("dir", "rtl");
+      } else {
+        form.classList.remove("rtl");
+        form.style.direction = "ltr";
+        form.style.textAlign = "left";
+        content.classList.remove("rtl");
+        content.style.direction = "ltr";
+        content.style.textAlign = "left";
+        table.classList.remove("rtl-table");
+        table.removeAttribute("dir");
+      }
+    }
     // ================================== 
     function submitUserInfo() {
       const t = translations[currentLanguage];
@@ -202,10 +182,7 @@
       document.getElementById("property-body").innerHTML = "";
     }
     // ================================== 
-    
-  
-
-function generatePropertyTable() {
+    function generatePropertyTable() {
       const t = translations[currentLanguage];
       const tbody = document.getElementById("property-body");
       tbody.innerHTML = "";
@@ -225,19 +202,16 @@ function generatePropertyTable() {
           <td class="validate-cell"></td>
           <td class="proposal-cell"></td>
           <td class="cancel-cell"></td>
-        `;  
-    
-  // === Appliquer RTL au tableau si la langue est l'arabe ===
-  const table = document.getElementById("property-table");
-
-  if (currentLanguage === "ar") {
-    table.classList.add("rtl-table");
-    table.setAttribute("dir", "rtl");
-  } else {
-    table.classList.remove("rtl-table");
-    table.removeAttribute("dir");
-  }
-          
+        `;
+        // === Appliquer RTL au tableau si la langue est l'arabe ===
+        const table = document.getElementById("property-table");
+        if (currentLanguage === "ar") {
+          table.classList.add("rtl-table");
+          table.setAttribute("dir", "rtl");
+        } else {
+          table.classList.remove("rtl-table");
+          table.removeAttribute("dir");
+        }
         // ================================== 
         const validateBtn = document.createElement("button");
         validateBtn.innerText = t.validate;
@@ -317,27 +291,23 @@ function generatePropertyTable() {
       }
       const nomUtilisateur = document.getElementById("username").value || `${t.nameLabel} Non renseigné`;
       const telephoneUtilisateur = document.getElementById("phone").value || `${t.phoneLabel} Non renseigné`;
-        
       const commentaires = document.getElementById("comments").value || "Aucun commentaire";
-      // ----- Format date -------------------
       if (commentaires.length > 300) {
         alert("Les commentaires ne doivent pas dépasser 300 caractères...");
         return;
       }
-      // ------- Format date ---------------------
-      const formatDate = (date, locale) => date.toLocaleDateString(locale, {
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-      });
+      const formatDate = (date, locale) =>
+        date.toLocaleDateString(locale, {
+          year: "numeric",
+          month: "long",
+          day: "numeric"
+        });
       const date = new Date();
-      const localeForDate = currentLanguage === "ar" ? "ar-EG" : `${currentLanguage}-${currentLanguage.toUpperCase()}`;
-      const dateStr = formatDate(date, localeForDate);
-      // --------- Nom du fichier ------------------
       const pad = n => n.toString().padStart(2, "0");
       const filenameDate = `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}_${pad(date.getHours())}${pad(date.getMinutes())}${pad(date.getSeconds())}`;
       const filename = `Offre_${filenameDate}.pdf`;
-      // ---- Préparer les données du tableau -------
+      const localeForDate = currentLanguage === "ar" ? "ar-EG" : `${currentLanguage}-${currentLanguage.toUpperCase()}`;
+      const dateStr = formatDate(date, localeForDate);
       const bodyData = [];
       rows.forEach(row => {
         const cells = row.querySelectorAll("td");
@@ -347,30 +317,59 @@ function generatePropertyTable() {
         const choix = [4, 5, 6].map(i => cells[i].innerText.trim()).find(text => text !== "") || "";
         bodyData.push([bien, superficie, prix, choix]);
       });
- // --- Construire la définition du document pdfMake --
+      const isRTL = currentLanguage === 'ar';
+      const align = isRTL ? 'right' : 'left';
+      const dir = isRTL ? 'rtl' : 'ltr';
       const docDefinition = {
         defaultStyle: {
           font: 'Amiri',
-          alignment: currentLanguage === 'ar' ? 'right' : 'left', // aligner tout le texte selon la langue
-          direction: currentLanguage === 'ar' ? 'rtl' : 'ltr' // direction droite à gauche pour arabe
+          alignment: align,
+          direction: dir
         },
         content: [{
             text: t.summaryTitle,
             style: 'header',
             alignment: 'center',
-            direction: currentLanguage === 'ar' ? 'rtl' : 'ltr'
+            direction: dir
           },
           {
-            text: ` ${t.dateLabel} ${dateStr}`,
-            style: 'info'
+            text: [{
+                text: t.dateLabel + " ",
+                bold: true
+              },
+              {
+                text: dateStr
+              }
+            ],
+            style: 'info',
+            alignment: align,
+            direction: dir
           },
           {
-            text: ` ${t.nameLabel} ${nomUtilisateur}`,
-            style: 'info'
+            text: [{
+                text: t.nameLabel + " ",
+                bold: true
+              },
+              {
+                text: nomUtilisateur
+              }
+            ],
+            style: 'info',
+            alignment: align,
+            direction: dir
           },
           {
-            text: ` ${t.phoneLabel} ${telephoneUtilisateur}`,
-            style: 'info'
+            text: [{
+                text: t.phoneLabel + " ",
+                bold: true
+              },
+              {
+                text: telephoneUtilisateur
+              }
+            ],
+            style: 'info',
+            alignment: align,
+            direction: dir
           },
           {
             style: 'tableExample',
@@ -380,79 +379,68 @@ function generatePropertyTable() {
                 [{
                     text: t.tableHeaders[1] || "Bien",
                     alignment: 'center',
-                    direction: currentLanguage === 'ar' ? 'rtl' : 'ltr'
+                    direction: dir
                   },
                   {
                     text: t.tableHeaders[2] || "Superficie",
                     alignment: 'center',
-                    direction: currentLanguage === 'ar' ? 'rtl' : 'ltr'
+                    direction: dir
                   },
                   {
                     text: t.tableHeaders[3] || "Prix",
                     alignment: 'center',
-                    direction: currentLanguage === 'ar' ? 'rtl' : 'ltr'
+                    direction: dir
                   },
                   {
                     text: t.choiceLabel || "Choix",
                     alignment: 'center',
-                    direction: currentLanguage === 'ar' ? 'rtl' : 'ltr'
+                    direction: dir
                   }
                 ],
                 ...bodyData.map(row => row.map(cell => ({
                   text: cell,
-                  alignment: currentLanguage === 'ar' ? 'right' : 'left'
+                  alignment: align,
+                  direction: dir
                 })))
               ]
             },
             layout: {
-              fillColor: rowIndex => (rowIndex === 0) ? '#2980B9' : (rowIndex % 2 === 0 ? '#F0F0F0' : null)
+              fillColor: rowIndex => rowIndex === 0 ? '#2980B9' : (rowIndex % 2 === 0 ? '#F0F0F0' : null)
             }
           },
           {
-            text: 'Commentaires:',
+            text: t.commentsTitle || 'Commentaires:',
             style: 'commentsHeader',
             margin: [0, 15, 0, 5],
-            alignment: currentLanguage === 'ar' ? 'right' : 'left'
+            alignment: align,
+            direction: dir
           },
           {
             text: commentaires,
             style: 'comments',
             alignment: isArabic(commentaires) ? 'right' : 'left',
-            dir: isArabic(commentaires) ? 'rtl' : 'ltr'
+            direction: isArabic(commentaires) ? 'rtl' : 'ltr'
           },
           {
             text: t.purchaseProcedureTitle,
             style: 'purchaseTitle',
             margin: [0, 25, 0, 5],
-            alignment: currentLanguage === 'ar' ? 'right' : 'left'
+            alignment: align,
+            direction: dir
           },
           {
             text: t.purchaseProcedure,
             style: 'purchaseText',
-            alignment: currentLanguage === 'ar' ? 'right' : 'left'
+            alignment: align,
+            direction: dir
           }
         ],
         styles: {
-          header: {
-            fontSize: 18,
-            bold: true
-          },
-          info: {
-            fontSize: 11,
-            bold: true,
-            margin: [0, 3, 0, 3]
-          },
-          tableExample: {
-            margin: [0, 15, 0, 0],
-            fontSize: 10
-          },
-          commentsHeader: {
-            fontSize: 11,
-            bold: true
-          },
-          comments: {
-            fontSize: 11
-          },
+          header: { fontSize: 18, bold: true },
+          info: { fontSize: 11, bold: true, margin: [0, 3, 0, 3] },
+          tableExample: { margin: [0, 15, 0, 0],fontSize: 10},
+          commentsHeader: { fontSize: 11, bold: true },
+          comments: { fontSize: 11 },
           purchaseTitle: {
             fontSize: 11,
             bold: true,
@@ -462,11 +450,7 @@ function generatePropertyTable() {
             fontSize: 11,
             italics: true
           },
-          footer: {
-            fontSize: 8,
-            alignment: 'right',
-            margin: [0, 0, 14, 0]
-          }
+          footer: { fontSize: 8, alignment: 'right', margin: [0, 0, 14, 0] }
         },
         footer: (currentPage, pageCount) => ({
           text: `Page ${currentPage} / ${pageCount}`,
@@ -474,16 +458,15 @@ function generatePropertyTable() {
         }),
         pageMargins: [14, 20, 14, 20]
       };
-      // ====== Générer le PDF avec pdfMake ==========
       pdfMake.createPdf(docDefinition).download(filename);
       alert(`${t.pdfSaved} ${filename}`);
       resetApp();
     }
-    // ===========caracteres arab ===============
+    // ====== Détection caractères arabes ===========
     function isArabic(text) {
       return /[\u0600-\u06FF]/.test(text);
     }
-
+    //===============================
     function applyArabicStyleTo(element) {
       if (isArabic(element.textContent)) {
         element.classList.add("texte-arabe");
