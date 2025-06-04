@@ -402,9 +402,9 @@ const translations = {
       "4. ستتلقى رسالة تأكيد عبر البريد الإلكتروني مع التفاصيل.\n" +
       "شكراً لثقتك.",
     summaryTitle: "ملخص الاختيارات",
-    nameLabel: "الاسم:",
-    phoneLabel: "الهاتف:",
-    dateLabel: "تاريخ الإدخال:",
+    nameLabel: ": الاسم",
+    phoneLabel: ": الهاتف",
+    dateLabel: ": تاريخ الإدخال",
     photoText: "صورة",
     videoText: "فيديو"
   },
