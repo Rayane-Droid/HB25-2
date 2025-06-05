@@ -391,7 +391,7 @@ const translations = {
     actionRequired: "يرجى اختيار إجراء لكل عقار.",
     pdfSaved: "تم حفظ ملف PDF باسم:",
     purchaseProcedureTitle: "إجراءات الشراء:",
-    purchaseProcedure :
+    purchaseProcedure:
 "1. تحقق من العقارات والاختيارات في الجدول.\n" +
 "2. اتصل بقسم المبيعات لدينا على الرقم المذكور.\n" +
 "3. سيقوم المستشار بمساعدتك لإتمام المعاملة.\n" +
