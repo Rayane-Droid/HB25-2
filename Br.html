@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -291,27 +290,18 @@
       }
       const nomUtilisateur = document.getElementById("username").value || `${t.nameLabel} Non renseigné`;
       const telephoneUtilisateur = document.getElementById("phone").value || `${t.phoneLabel} Non renseigné`;
-    //        
+      //        
       let commentaires = document.getElementById("comments").value.trim();
-
-if (!commentaires) {
-  // La valeur est vide, on récupère la traduction par défaut
-  let noCommentText = generalTranslations.noComment[currentLanguage] || "Aucun commentaire";
-  // On applique fixArabicOrder sur cette valeur par défaut
-  commentaires = fixArabicOrder(noCommentText);
-}
-
-      
-      
-      
-      
-      
-      
+      if (!commentaires) {
+        // La valeur est vide, on récupère la traduction par défaut
+        let noCommentText = generalTranslations.noComment[currentLanguage] || "Aucun commentaire";
+        // On applique fixArabicOrder sur cette valeur par défaut
+        commentaires = fixArabicOrder(noCommentText);
+      }
       if (commentaires.length > 300) {
         alert("Les commentaires ne doivent pas dépasser 300 caractères...");
         return;
       }
-      
       const formatDate = (date, locale) =>
         date.toLocaleDateString(locale, {
           year: "numeric",
@@ -323,24 +313,9 @@ if (!commentaires) {
       const filenameDate = `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}_${pad(date.getHours())}${pad(date.getMinutes())}${pad(date.getSeconds())}`;
       const filename = `Offre_${filenameDate}.pdf`;
       const localeForDate = currentLanguage === "ar" ? "ar-EG" : `${currentLanguage}-${currentLanguage.toUpperCase()}`;
-      
-      
-      
-      
-      
       const rawDateStr = formatDate(date, localeForDate);
-const dateStr = currentLanguage === 'ar' ? convertArabicDigitsToEnglish(rawDateStr) : rawDateStr;
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-    //  const dateStr = formatDate(date, localeForDate);
+      const dateStr = currentLanguage === 'ar' ? convertArabicDigitsToEnglish(rawDateStr) : rawDateStr;
+      //  const dateStr = formatDate(date, localeForDate);
       const bodyData = [];
       rows.forEach(row => {
         const cells = row.querySelectorAll("td");
@@ -360,75 +335,68 @@ const dateStr = currentLanguage === 'ar' ? convertArabicDigitsToEnglish(rawDateS
           direction: dir
         },
         content: [{
-       //     
-          
-          
-        text: [{ text: currentLanguage === "ar" ? fixArabicOrder(t.summaryTitle) : t.summaryTitle,
- }],
+            //     
+            text: [{
+              text: currentLanguage === "ar" ? fixArabicOrder(t.summaryTitle) : t.summaryTitle,
+            }],
             style: 'header',
             alignment: 'center',
             direction: dir
           },
-      
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-
-                  
-        //////////////////////          
- {
-  text: isRTL
-    ? [{ text: fixArabicOrder(`${t.dateLabel}${dateStr}`) }]
-    : [{ text: t.dateLabel + " ", bold: true }, { text: dateStr }],
-  style: 'info',
-  alignment: align,
-  direction: dir
-},
-
-        ////////////////////          
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
+          //////////////////////          
           {
-   //         
- text: isRTL
-  ? [{ text: nomUtilisateur + " " }, { text: t.nameLabel, bold: true }]
-    : [{ text: t.nameLabel + " ", bold: true }, { text: nomUtilisateur }],
-
+            text: isRTL ?
+              [{
+                text: fixArabicOrder(`${t.dateLabel}${dateStr}`)
+              }] :
+              [{
+                text: t.dateLabel + " ",
+                bold: true
+              }, {
+                text: dateStr
+              }],
             style: 'info',
             alignment: align,
             direction: dir
           },
-      
-                  {
-  text: isRTL
-   ? [{ text: telephoneUtilisateur + " " }, { text: t.phoneLabel, bold: true }]
-   : [{ text: t.phoneLabel + " ", bold: true }, { text: telephoneUtilisateur }],
-
-  style: 'info',
-  alignment: align,
-  direction: dir
-},
-             
+          ////////////////////          
+          {
+            //         
+            text: isRTL ?
+              [{
+                text: nomUtilisateur + " "
+              }, {
+                text: t.nameLabel,
+                bold: true
+              }] :
+              [{
+                text: t.nameLabel + " ",
+                bold: true
+              }, {
+                text: nomUtilisateur
+              }],
+            style: 'info',
+            alignment: align,
+            direction: dir
+          },
+          {
+            text: isRTL ?
+              [{
+                text: telephoneUtilisateur + " "
+              }, {
+                text: t.phoneLabel,
+                bold: true
+              }] :
+              [{
+                text: t.phoneLabel + " ",
+                bold: true
+              }, {
+                text: telephoneUtilisateur
+              }],
+            style: 'info',
+            alignment: align,
+            direction: dir
+          },
           {
             style: 'tableExample',
             table: {
@@ -449,13 +417,11 @@ const dateStr = currentLanguage === 'ar' ? convertArabicDigitsToEnglish(rawDateS
                     alignment: 'center',
                     direction: dir
                   },
-                 
-                 {
-                 text: t.choiceLabel || generalTranslations.choice[currentLanguage] || "Choix",
-  alignment: 'center',
-  direction: dir
-}                 
-                 
+                  {
+                    text: t.choiceLabel || generalTranslations.choice[currentLanguage] || "Choix",
+                    alignment: 'center',
+                    direction: dir
+                  }
                 ],
                 ...bodyData.map(row => row.map(cell => ({
                   text: cell,
@@ -469,9 +435,8 @@ const dateStr = currentLanguage === 'ar' ? convertArabicDigitsToEnglish(rawDateS
             }
           },
           {
-       //     text: t.commentsTitle || 'Commentaires:',
+            //     text: t.commentsTitle || 'Commentaires:',
             text: t.commentsTitle || generalTranslations.commentsLabel[currentLanguage] || 'Commentaires :',
-            
             style: 'commentsHeader',
             margin: [0, 15, 0, 5],
             alignment: align,
@@ -484,34 +449,44 @@ const dateStr = currentLanguage === 'ar' ? convertArabicDigitsToEnglish(rawDateS
             direction: isArabic(commentaires) ? 'rtl' : 'ltr'
           },
           {
-          //  text: t.purchaseProcedureTitle,
+            //  text: t.purchaseProcedureTitle,
             text: currentLanguage === "ar" ? fixArabicOrder(t.purchaseProcedureTitle) : t.purchaseProcedureTitle,
-
-            
             style: 'purchaseTitle',
             margin: [0, 25, 0, 5],
             alignment: align,
             direction: dir
           },
-                              
-{
-  stack: t.purchaseProcedure.map(line => ({
-   // text: currentLanguage === "ar" ? fixArabicOrder(line) : line
-    text: line
-  })),
-  style: 'purchaseText',
- alignment: align,
-  direction: dir
-}
-
-   
+          {
+            stack: t.purchaseProcedure.map(line => ({
+              // text: currentLanguage === "ar" ? fixArabicOrder(line) : line
+              text: line
+            })),
+            style: 'purchaseText',
+            alignment: align,
+            direction: dir
+          }
         ],
         styles: {
-          header: { fontSize: 18, bold: true },
-          info: { fontSize: 11, bold: true, margin: [0, 3, 0, 3] },
-          tableExample: { margin: [0, 15, 0, 0],fontSize: 10},
-          commentsHeader: { fontSize: 11, bold: true },
-          comments: { fontSize: 11 },
+          header: {
+            fontSize: 18,
+            bold: true
+          },
+          info: {
+            fontSize: 11,
+            bold: true,
+            margin: [0, 3, 0, 3]
+          },
+          tableExample: {
+            margin: [0, 15, 0, 0],
+            fontSize: 10
+          },
+          commentsHeader: {
+            fontSize: 11,
+            bold: true
+          },
+          comments: {
+            fontSize: 11
+          },
           purchaseTitle: {
             fontSize: 11,
             bold: true,
@@ -521,7 +496,11 @@ const dateStr = currentLanguage === 'ar' ? convertArabicDigitsToEnglish(rawDateS
             fontSize: 11,
             italics: true
           },
-          footer: { fontSize: 8, alignment: 'right', margin: [0, 0, 14, 0] }
+          footer: {
+            fontSize: 8,
+            alignment: 'right',
+            margin: [0, 0, 14, 0]
+          }
         },
         footer: (currentPage, pageCount) => ({
           text: `Page ${currentPage} / ${pageCount}`,
@@ -545,9 +524,8 @@ const dateStr = currentLanguage === 'ar' ? convertArabicDigitsToEnglish(rawDateS
     }
     //
     document.querySelectorAll('div, p, span, td, th, label, button').forEach(el => {
-  applyArabicStyleTo(el);
-});
-
+      applyArabicStyleTo(el);
+    });
   </script>
 </body>
 
