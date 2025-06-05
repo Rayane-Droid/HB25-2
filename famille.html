@@ -14,7 +14,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
   <!--  -->
   <script src="https://rayane-droid.github.io/HB25-2/dictionnaire.js"></script>
-
+  <script src="https://rayane-droid.github.io/HB25-2/scriptAr.js"></script>
   <script src="https://rayane-droid.github.io/HB25-2/Amiri-fonts.js"></script>
   <script src="https://rayane-droid.github.io/HB25-2/script.js"></script>
 </head>
@@ -278,186 +278,234 @@
         bolditalics: 'Amiri-Bold.ttf'
       }
     };
-    // == Fonction saveToPDF utilisant pdfMake =====
+    // == Fonction saveToPDF utilisant pdfMake ==
     function saveToPDF() {
       const t = translations[currentLanguage];
       const rows = document.querySelectorAll("#property-body tr");
+      // Validation : toutes les lignes doivent être cochées
       for (const row of rows) {
         if (row.getAttribute("data-checked") !== "true") {
           alert(t.actionRequired);
           return;
         }
       }
-      const nomUtilisateur = document.getElementById("username").value || `${t.nameLabel} Non renseigné`;
-      const telephoneUtilisateur = document.getElementById("phone").value || `${t.phoneLabel} Non renseigné`;
-    //        
-      const commentaires = document.getElementById("comments").value.trim() || generalTranslations.noComment[currentLanguage] || "Aucun commentaire";
-      
+      // Récupération des infos utilisateur avec valeurs par défaut traduites
+      const nomUtilisateur = document.getElementById("username").value.trim() || `${t.nameLabel} Non renseigné`;
+      const telephoneUtilisateur = document.getElementById("phone").value.trim() || `${t.phoneLabel} Non renseigné`;
+      // Gestion des commentaires, texte par défaut si vide
+      let commentaires = document.getElementById("comments").value.trim();
+      if (!commentaires) {
+        const noCommentText = generalTranslations.noComment[currentLanguage] || "Aucun commentaire";
+        commentaires = (currentLanguage === "ar") ? fixArabicOrder(noCommentText) : noCommentText;
+      }
       if (commentaires.length > 300) {
-        alert("Les commentaires ne doivent pas dépasser 300 caractères...");
+        alert(t.commentLengthExceeded || "Les commentaires ne doivent pas dépasser 300 caractères...");
         return;
       }
+      // Fonction pour formater la date selon la langue
       const formatDate = (date, locale) =>
         date.toLocaleDateString(locale, {
           year: "numeric",
           month: "long",
-          day: "numeric"
+          day: "numeric",
         });
       const date = new Date();
-      const pad = n => n.toString().padStart(2, "0");
+      const pad = (n) => n.toString().padStart(2, "0");
       const filenameDate = `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}_${pad(date.getHours())}${pad(date.getMinutes())}${pad(date.getSeconds())}`;
       const filename = `Offre_${filenameDate}.pdf`;
+      // Locale date pour chaque langue, ajustement pour arabe
       const localeForDate = currentLanguage === "ar" ? "ar-EG" : `${currentLanguage}-${currentLanguage.toUpperCase()}`;
-      const dateStr = formatDate(date, localeForDate);
+      const rawDateStr = formatDate(date, localeForDate);
+      const dateStr = currentLanguage === "ar" ? convertArabicDigitsToEnglish(rawDateStr) : rawDateStr;
+      // Préparer les données du tableau
       const bodyData = [];
-      rows.forEach(row => {
+      rows.forEach((row) => {
         const cells = row.querySelectorAll("td");
-        const bien = cells[1].innerText.trim();
-        const superficie = cells[2].innerText.trim();
-        const prix = cells[3].innerText.trim();
-        const choix = [4, 5, 6].map(i => cells[i].innerText.trim()).find(text => text !== "") || "";
+        const bien = cells[1]?.innerText.trim() || "";
+        const superficie = cells[2]?.innerText.trim() || "";
+        const prix = cells[3]?.innerText.trim() || "";
+        // Trouver la première colonne choix non vide parmi colonnes 4,5,6
+        const choix = [4, 5, 6].map((i) => cells[i]?.innerText.trim() || "").find((text) => text !== "") || "";
         bodyData.push([bien, superficie, prix, choix]);
       });
-      const isRTL = currentLanguage === 'ar';
-      const align = isRTL ? 'right' : 'left';
-      const dir = isRTL ? 'rtl' : 'ltr';
+      // Gestion RTL ou LTR selon langue
+      const isRTL = ["ar", "he", "fa", "ur"].includes(currentLanguage);
+      const align = isRTL ? "right" : "left";
+      const dir = isRTL ? "rtl" : "ltr";
+      // Gestion des lignes purchaseProcedure, qui peut être chaîne ou tableau
+      let purchaseLines = [];
+      if (Array.isArray(t.purchaseProcedure)) {
+        purchaseLines = t.purchaseProcedure;
+      } else if (typeof t.purchaseProcedure === "string") {
+        purchaseLines = t.purchaseProcedure.split("\n");
+      }
+      // Création de la définition du document PDF
       const docDefinition = {
         defaultStyle: {
-          font: 'Amiri',
+          font: "Amiri", // Assure-toi que la police supporte toutes tes langues
           alignment: align,
-          direction: dir
+          direction: dir,
         },
         content: [{
-            text: t.summaryTitle,
-            style: 'header',
-            alignment: 'center',
-            direction: dir
+            text: currentLanguage === "ar" ? fixArabicOrder(t.summaryTitle) : t.summaryTitle,
+            style: "header",
+            alignment: "center",
+            direction: dir,
           },
           {
-            text: [{
-                text: t.dateLabel + " ",
+            text: isRTL ? [{
+              text: fixArabicOrder(`${t.dateLabel} ${dateStr}`)
+            }] : [{
+                text: `${t.dateLabel} `,
                 bold: true
               },
               {
                 text: dateStr
-              }
+              },
             ],
-            style: 'info',
+            style: "info",
             alignment: align,
-            direction: dir
+            direction: dir,
           },
           {
-   //         
-  text: isRTL
-    ? [{ text: nomUtilisateur + " " }, { text: t.nameLabel, bold: true }]
-    : [{ text: t.nameLabel + " ", bold: true }, { text: nomUtilisateur
-
-}
+            text: isRTL ? [{
+              text: fixArabicOrder(`${t.nameLabel} ${nomUtilisateur}`)
+            }] : [{
+                text: `${t.nameLabel} `,
+                bold: true
+              },
+              {
+                text: nomUtilisateur
+              },
             ],
-            style: 'info',
+            style: "info",
             alignment: align,
-            direction: dir
+            direction: dir,
           },
-      
-                  {
-  text: isRTL
-    ? [{ text: telephoneUtilisateur + " " }, { text: t.phoneLabel, bold: true }]
-    : [{ text: t.phoneLabel + " ", bold: true }, { text: telephoneUtilisateur }],
-  style: 'info',
-  alignment: align,
-  direction: dir
-},
-             
           {
-            style: 'tableExample',
+            text: isRTL ? [{
+              text: fixArabicOrder(`${t.phoneLabel} ${telephoneUtilisateur}`)
+            }] : [{
+                text: `${t.phoneLabel} `,
+                bold: true
+              },
+              {
+                text: telephoneUtilisateur
+              },
+            ],
+            style: "info",
+            alignment: align,
+            direction: dir,
+          },
+          {
+            style: "tableExample",
             table: {
-              widths: ['*', '*', '*', '*'],
+              widths: ["*", "*", "*", "*"],
               body: [
                 [{
                     text: t.tableHeaders[1] || "Bien",
-                    alignment: 'center',
+                    alignment: "center",
                     direction: dir
                   },
                   {
                     text: t.tableHeaders[2] || "Superficie",
-                    alignment: 'center',
+                    alignment: "center",
                     direction: dir
                   },
                   {
                     text: t.tableHeaders[3] || "Prix",
-                    alignment: 'center',
+                    alignment: "center",
                     direction: dir
                   },
-                 
-                 {
-                 text: t.choiceLabel || generalTranslations.choice[currentLanguage] || "Choix",
-  alignment: 'center',
-  direction: dir
-}                 
-                 
+                  {
+                    text: t.choiceLabel || generalTranslations.choice[currentLanguage] || "Choix",
+                    alignment: "center",
+                    direction: dir,
+                  },
                 ],
-                ...bodyData.map(row => row.map(cell => ({
-                  text: cell,
-                  alignment: align,
-                  direction: dir
-                })))
-              ]
+                ...bodyData.map((row) =>
+                  row.map((cell) => ({
+                    text: cell,
+                    alignment: align,
+                    direction: dir,
+                  }))
+                ),
+              ],
             },
             layout: {
-              fillColor: rowIndex => rowIndex === 0 ? '#2980B9' : (rowIndex % 2 === 0 ? '#F0F0F0' : null)
-            }
+              fillColor: (rowIndex) => (rowIndex === 0 ? "#2980B9" : rowIndex % 2 === 0 ? "#F0F0F0" : null),
+            },
           },
           {
-       //     text: t.commentsTitle || 'Commentaires:',
-            text: t.commentsTitle || generalTranslations.commentsLabel[currentLanguage] || 'Commentaires :',
-            
-            style: 'commentsHeader',
+            text: t.commentsTitle || generalTranslations.commentsLabel[currentLanguage] || "Commentaires :",
+            style: "commentsHeader",
             margin: [0, 15, 0, 5],
             alignment: align,
-            direction: dir
+            direction: dir,
           },
           {
             text: commentaires,
-            style: 'comments',
-            alignment: isArabic(commentaires) ? 'right' : 'left',
-            direction: isArabic(commentaires) ? 'rtl' : 'ltr'
+            style: "comments",
+            alignment: isArabic(commentaires) ? "right" : "left",
+            direction: isArabic(commentaires) ? "rtl" : "ltr",
           },
           {
-            text: t.purchaseProcedureTitle,
-            style: 'purchaseTitle',
+            text: currentLanguage === "ar" ? fixArabicOrder(t.purchaseProcedureTitle) : t.purchaseProcedureTitle,
+            style: "purchaseTitle",
             margin: [0, 25, 0, 5],
             alignment: align,
-            direction: dir
+            direction: dir,
           },
           {
-            text: t.purchaseProcedure,
-            style: 'purchaseText',
+            stack: purchaseLines.map((line) => ({
+              text: currentLanguage === "ar" ? fixArabicOrder(line) : line,
+            })),
+            style: "purchaseText",
             alignment: align,
-            direction: dir
-          }
+            direction: dir,
+          },
         ],
         styles: {
-          header: { fontSize: 18, bold: true },
-          info: { fontSize: 11, bold: true, margin: [0, 3, 0, 3] },
-          tableExample: { margin: [0, 15, 0, 0],fontSize: 10},
-          commentsHeader: { fontSize: 11, bold: true },
-          comments: { fontSize: 11 },
+          header: {
+            fontSize: 18,
+            bold: true,
+          },
+          info: {
+            fontSize: 11,
+            bold: true,
+            margin: [0, 3, 0, 3],
+          },
+          tableExample: {
+            margin: [0, 15, 0, 0],
+            fontSize: 10,
+          },
+          commentsHeader: {
+            fontSize: 11,
+            bold: true,
+          },
+          comments: {
+            fontSize: 11,
+          },
           purchaseTitle: {
             fontSize: 11,
             bold: true,
-            italics: true
+            italics: true,
           },
           purchaseText: {
             fontSize: 11,
-            italics: true
+            italics: true,
           },
-          footer: { fontSize: 8, alignment: 'right', margin: [0, 0, 14, 0] }
+          footer: {
+            fontSize: 8,
+            alignment: "right",
+            margin: [0, 0, 14, 0],
+          },
         },
         footer: (currentPage, pageCount) => ({
           text: `Page ${currentPage} / ${pageCount}`,
-          style: 'footer'
+          style: "footer",
         }),
-        pageMargins: [14, 20, 14, 20]
+        pageMargins: [14, 20, 14, 20],
       };
       pdfMake.createPdf(docDefinition).download(filename);
       alert(`${t.pdfSaved} ${filename}`);
@@ -467,16 +515,6 @@
     function isArabic(text) {
       return /[\u0600-\u06FF]/.test(text);
     }
-    //===============================
-    function applyArabicStyleTo(element) {
-      if (isArabic(element.textContent)) {
-        element.classList.add("texte-arabe");
-      }
-    }
-    // = Application auto à tous les éléments existants
-    document.querySelectorAll('div, p, span').forEach(el => {
-      applyArabicStyleTo(el);
-    });
   </script>
 </body>
 
