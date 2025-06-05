@@ -35,7 +35,6 @@ const generalTranslations = {
   }
 };
 
-
 const properties = [
   {
     keys: {
@@ -396,18 +395,14 @@ ar: {
     pdfSaved: "تم حفظ ملف PDF باسم :",
     purchaseProcedureTitle: "إجراءات الشراء :",
 
-
-
-
-
-purchaseProcedure: [
-      ".1 تحقق من العقارات والاختيارات في الجدول.",
-      ".2 اتصل بقسم المبيعات على الرقم المذكور.",
-      ".3 سيقوم المستشار بمساعدتك لإتمام المعاملة.",
-      ".4 ستتلقى رسالة تأكيد عبر البريد الإلكتروني.",
-      ".5 أرسل عرضك عبر البريد الإلكتروني أو الواتساب.",
-      "شكراً لثقتك."
-    ],
+    purchaseProcedure: [
+          ".1 تحقق من العقارات والاختيارات في الجدول.",
+          ".2 اتصل بقسم المبيعات على الرقم المذكور.",
+          ".3 سيقوم المستشار بمساعدتك لإتمام المعاملة.",
+          ".4 ستتلقى رسالة تأكيد عبر البريد الإلكتروني.",
+          ".5 أرسل عرضك عبر البريد الإلكتروني أو الواتساب.",
+          "شكراً لثقتك."
+        ],
   
     summaryTitle: "ملخص الاختيارات",
     nameLabel: "الاسم :",
@@ -554,7 +549,3 @@ purchaseProcedure: [
     videoText: "Video"
   }
 };
-
-// Mise à jour du label et placeholder
-//document.getElementById("comment-label").innerText = generalTranslations.commentsLabel[currentLanguage];
-//document.getElementById("comments").placeholder = generalTranslations.placeholder[currentLanguage];
