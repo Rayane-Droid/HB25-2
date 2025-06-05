@@ -1,1 +1,38 @@
+/* CSS */
+
+.rtl {
+  float: right;
+  /* Optionnel pour gérer les champs input aussi */
+}
+
+.input-block input {
+  text-align: inherit;
+}
+
+.rtl-table {
+  direction: rtl;
+  text-align: right;
+}
+
+#property-table th,
+#property-table td {
+  text-align: inherit; /* hérite de la direction du tableau */
+}
+
+
+
+
+.styles: {
+  purchaseText: {
+    fontSize: 11,
+    lineHeight: 1.4
+  },
+  sectionTitle: {
+    fontSize: 13,
+    bold: true,
+    margin: [0, 5, 0, 5]
+  }
+}
+
+
 
