@@ -102,4 +102,4 @@ pdfMake.fonts = {
     italics: "Amiri-Regular.ttf",
     bolditalics: "Amiri-Bold.ttf"
   }
-};
+}//;
