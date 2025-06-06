@@ -16,7 +16,11 @@ function generatePropertyTable() {
     const price =
       (property.prices[currentLanguage] || property.prices.fr) + " " + currency;
 
-
+// Appliquer l'inversion si la langue est l'arabe
+if (currentLanguage === "ar") {
+  area = fixArabicOrder(area);
+  price = fixArabicOrder(price);
+}
   row.innerHTML = `
     <td>${index + 1}</td>
     <td>${key}</td>
