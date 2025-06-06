@@ -322,7 +322,7 @@ const translations = {
 "08. Vous recevrez une confirmation par email avec les détails.\n" +      
 "09. Vous recevrez une confirmation par email avec les détails.\n" +      
  "10. Vous recevrez une confirmation par email avec les détails.\n" +     
- "11. Vous recevrez une confirmation par email avec les détails.\n" +      
+ "11. Monaie : en Dirhams Marocain (DH).\n" +      
  "12. Vous recevrez une confirmation par email avec les détails.\n" +      
  "13. Envoyer votre proposition par email/whatsup.\n" +
       "Merci de votre confiance.",
