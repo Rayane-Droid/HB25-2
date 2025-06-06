@@ -93,3 +93,13 @@ const proposeBtn = document.createElement("button");
     tbody.appendChild(row);
   });
 }
+
+// = Enregistre la police "Amiri" avec pdfMake ====
+pdfMake.fonts = {
+  Amiri: {
+    normal: "Amiri-Regular.ttf",
+    bold: "Amiri-Bold.ttf",
+    italics: "Amiri-Regular.ttf",
+    bolditalics: "Amiri-Bold.ttf"
+  }
+};
