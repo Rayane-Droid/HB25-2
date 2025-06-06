@@ -45,3 +45,51 @@ function generatePropertyTable() {
     };
 
     
+const proposeBtn = document.createElement("button");
+    proposeBtn.innerText = t.propose;
+    proposeBtn.className = "btn";
+    proposeBtn.onclick = () => {
+      const input = document.createElement("input");
+      input.type = "number";
+      input.placeholder = t.propose + " un prix";
+      input.style.width = "120px";
+      //===================================
+      const sendBtn = document.createElement("button");
+      sendBtn.innerText = t.continue;
+      sendBtn.className = "btn";
+      sendBtn.onclick = () => {
+        const value = input.value;
+        if (!value || isNaN(value)) {
+          alert(t.invalidPrice);
+          return;
+        }
+        //
+        row.querySelector(".proposal-cell").textContent = value + " " + currency;
+        row.querySelector(".validate-cell").innerHTML = "";
+        row.querySelector(".cancel-cell").innerHTML = "";
+        row.setAttribute("data-checked", "true");
+      };
+      //===================================
+      const proposalCell = row.querySelector(".proposal-cell");
+      proposalCell.innerHTML = "";
+      proposalCell.appendChild(input);
+      proposalCell.appendChild(sendBtn);
+      row.querySelector(".validate-cell").innerHTML = "";
+      row.querySelector(".cancel-cell").innerHTML = "";
+    };
+    //===================================
+    const cancelBtn = document.createElement("button");
+    cancelBtn.innerText = t.cancel;
+    cancelBtn.className = "btn";
+    cancelBtn.onclick = () => {
+      row.querySelector(".cancel-cell").innerText = t.noDesire;
+      row.querySelector(".validate-cell").innerHTML = "";
+      row.querySelector(".proposal-cell").innerHTML = "";
+      row.setAttribute("data-checked", "true");
+    };
+    row.querySelector(".validate-cell").appendChild(validateBtn);
+    row.querySelector(".proposal-cell").appendChild(proposeBtn);
+    row.querySelector(".cancel-cell").appendChild(cancelBtn);
+    tbody.appendChild(row);
+  });
+}
