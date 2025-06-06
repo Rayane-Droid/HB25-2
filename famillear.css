@@ -9,11 +9,6 @@
   text-align: inherit;
 }
 
-.rtl-table {
-  direction: rtl;
-  text-align: right;
-}
-
 #property-table th,
 #property-table td {
   text-align: inherit; /* hérite de la direction du tableau */
