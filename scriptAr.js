@@ -5,6 +5,16 @@
 // const words = phrase.trim().split(/\s+/);
 // return words.reverse().join(" ");
 //}
+function fixArabicOrder(phrase) {
+  if (!phrase || typeof phrase !== "string") return phrase;
+
+  // Supprime la ponctuation temporairement, puis la réinsère à la fin
+  const punctuation = phrase.match(/[.?!،؛]$/);
+  const cleanPhrase = phrase.replace(/[.?!،؛]$/, "").trim();
+
+  const words = cleanPhrase.split(/\s+/).reverse();
+  return words.join(" ") + (punctuation ? punctuation[0] : "");
+}
 
 
 // Forcer les chiffres occidentaux même en arabe
