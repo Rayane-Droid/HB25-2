@@ -15,4 +15,4 @@ updateCommentsSection("fr");
 // Écouteur d'événement sur le sélecteur
 document.getElementById("language").addEventListener("change", function () {
   updateCommentsSection(this.value);
-});
+})//;
