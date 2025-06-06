@@ -32,7 +32,15 @@ const generalTranslations = {
     es: "Elección",
     de: "Auswahl",
     it: "Scelta"
-  }
+  },
+  currencyLabel: {
+  fr: "Dirhams",
+  en: "Dirhams",
+  ar: "درهم",
+  es: "Dirhams",
+  de: "Dirhams",
+  it: "Dirham"
+},
 };
 
 const properties = [
