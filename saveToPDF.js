@@ -184,38 +184,67 @@ commentEl.className = currentLanguage === "ar" ? "rtl-text" : "ltr-text";
 
           widths: ["auto", "*", "*", "*", "*"],
 
-          body: [
-            [
-              {
-                text: t.tableHeaders[0] || "N°",
-                alignment: "center",
-                direction: dir
-              },
+      body: [
+  (currentLanguage === "ar"
+    ? [
+        {
+          text: t.choiceLabel || generalTranslations.choice[currentLanguage] || "Choix",
+          alignment: "center",
+          direction: dir
+        },
+        {
+          text: t.tableHeaders[3] || "Prix",
+          alignment: "center",
+          direction: dir
+        },
+        {
+          text: t.tableHeaders[2] || "Superficie",
+          alignment: "center",
+          direction: dir
+        },
+        {
+          text: t.tableHeaders[1] || "Bien",
+          alignment: "center",
+          direction: dir
+        },
+        {
+          text: t.tableHeaders[0] || "N°",
+          alignment: "center",
+          direction: dir
+        }
+      ]
+    : [
+        {
+          text: t.tableHeaders[0] || "N°",
+          alignment: "center",
+          direction: dir
+        },
+        {
+          text: t.tableHeaders[1] || "Bien",
+          alignment: "center",
+          direction: dir
+        },
+        {
+          text: t.tableHeaders[2] || "Superficie",
+          alignment: "center",
+          direction: dir
+        },
+        {
+          text: t.tableHeaders[3] || "Prix",
+          alignment: "center",
+          direction: dir
+        },
+        {
+          text: t.choiceLabel || generalTranslations.choice[currentLanguage] || "Choix",
+          alignment: "center",
+          direction: dir
+        }
+      ]),
 
-              {
-                text: t.tableHeaders[1] || "Bien",
-                alignment: "center",
-                direction: dir
-              },
-              {
-                text: t.tableHeaders[2] || "Superficie",
-                alignment: "center",
-                direction: dir
-              },
-              {
-                text: t.tableHeaders[3] || "Prix",
-                alignment: "center",
-                direction: dir
-              },
-              {
-                text:
-                  t.choiceLabel ||
-                  generalTranslations.choice[currentLanguage] ||
-                  "Choix",
-                alignment: "center",
-                direction: dir
-              }
-            ],
+
+
+
+            
             ...bodyData.map((row) =>
               row.map((cell) => ({
                 text: cell,
@@ -225,6 +254,22 @@ commentEl.className = currentLanguage === "ar" ? "rtl-text" : "ltr-text";
             )
           ]
         },
+
+
+
+
+
+
+// 🔁 Inversion des lignes si arabe
+if (currentLanguage === "ar") {
+  bodyData.forEach((row, i) => {
+    bodyData[i] = row.slice().reverse();
+  });
+}
+
+
+
+        
         layout: {
           fillColor: (rowIndex) =>
             rowIndex === 0 ? "#2980B9" : rowIndex % 2 === 0 ? "#F0F0F0" : null
