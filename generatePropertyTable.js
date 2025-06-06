@@ -10,10 +10,11 @@ function generatePropertyTable() {
     const description =
       property.descriptions[currentLanguage] || property.descriptions.fr;
     const superficy = generalTranslations.superficy[currentLanguage] || "DH";
-    const area = (property.areas[currentLanguage] || property.areas.fr) + " " + superficy;
-    //const price = property.prices[currentLanguage] || property.prices.fr;
+    const area =
+      (property.areas[currentLanguage] || property.areas.fr) + " " + superficy;
     const currency = generalTranslations.currencyLabel[currentLanguage] || "DH";
-    const price = (property.prices[currentLanguage] || property.prices.fr) + " " + currency;
+    const price =
+      (property.prices[currentLanguage] || property.prices.fr) + " " + currency;
 
     row.innerHTML = `
           <td>${index + 1}</td>
@@ -43,9 +44,7 @@ function generatePropertyTable() {
       row.querySelector(".cancel-cell").innerHTML = "";
       row.setAttribute("data-checked", "true");
     };
-
-    
-const proposeBtn = document.createElement("button");
+    const proposeBtn = document.createElement("button");
     proposeBtn.innerText = t.propose;
     proposeBtn.className = "btn";
     proposeBtn.onclick = () => {
@@ -64,7 +63,7 @@ const proposeBtn = document.createElement("button");
           return;
         }
         //
-        row.querySelector(".proposal-cell").textContent = value + " " + currency;
+        row.querySelector(".proposal-cell").textContent = value + " DH";
         row.querySelector(".validate-cell").innerHTML = "";
         row.querySelector(".cancel-cell").innerHTML = "";
         row.setAttribute("data-checked", "true");
@@ -93,7 +92,6 @@ const proposeBtn = document.createElement("button");
     tbody.appendChild(row);
   });
 }
-
 // = Enregistre la police "Amiri" avec pdfMake ====
 pdfMake.fonts = {
   Amiri: {
@@ -102,4 +100,4 @@ pdfMake.fonts = {
     italics: "Amiri-Regular.ttf",
     bolditalics: "Amiri-Bold.ttf"
   }
-}//;
+};
