@@ -1,3 +1,4 @@
+// == Fonction saveToPDF utilisant pdfMake ==
 function saveToPDF() {
   const t = translations[currentLanguage];
   const rows = document.querySelectorAll("#property-body tr");
