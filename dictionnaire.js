@@ -40,7 +40,7 @@ const generalTranslations = {
   es: "Dirhams",
   de: "Dirhams",
   it: "Dirham"
-},
+}
 };
 
 const properties = [
