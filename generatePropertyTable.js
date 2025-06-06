@@ -16,15 +16,28 @@ function generatePropertyTable() {
     const price =
       (property.prices[currentLanguage] || property.prices.fr) + " " + currency;
 
-    row.innerHTML = `
-          <td>${index + 1}</td>
-          <td>${key}</td>
-          <td>${area}</td>
-          <td>${price}</td>
-          <td class="validate-cell"></td>
-          <td class="proposal-cell"></td>
-          <td class="cancel-cell"></td>
-        `;
+if (currentLanguage === "ar") {
+  row.innerHTML = `
+    <td class="cancel-cell"></td>
+    <td class="proposal-cell"></td>
+    <td class="validate-cell"></td>
+    <td>${price}</td>
+    <td>${area}</td>
+    <td>${key}</td>
+    <td>${index + 1}</td>
+  `;
+} else {
+  row.innerHTML = `
+    <td>${index + 1}</td>
+    <td>${key}</td>
+    <td>${area}</td>
+    <td>${price}</td>
+    <td class="validate-cell"></td>
+    <td class="proposal-cell"></td>
+    <td class="cancel-cell"></td>
+  `;
+}
+
     // === Appliquer RTL au tableau si la langue est l'arabe ===
     const table = document.getElementById("property-table");
     if (currentLanguage === "ar") {
