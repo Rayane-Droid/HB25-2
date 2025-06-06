@@ -21,7 +21,7 @@ function saveToPDF() {
 let commentaires = document.getElementById("comments").value.trim();
 
 // Récupérer l'élément d'affichage
-const commentEl = document.getElementById("comment-output");
+const commentEl = document.getElementById("commentsLabel");
 
 // Si vide, utiliser texte par défaut
 if (!commentaires) {
