@@ -40,7 +40,15 @@ const generalTranslations = {
   es: "Dirhams",
   de: "Dirhams",
   it: "Dirham"
-}
+},
+  superficy: {
+      fr: "m²",
+      en: "sqm",
+      ar: "متر مربع",
+      es: "m²",
+      de: "m²",
+      it: "m²"
+    },
 };
 
 const properties = [
@@ -72,20 +80,20 @@ const properties = [
       it: "Grande villa con piscina e giardino."
     },
     areas: {
-      fr: "350 m²",
-      en: "350 sqm",
-      ar: "350 متر مربع",
-      es: "350 m²",
-      de: "350 m²",
-      it: "350 m²"
+      fr: "350",
+      en: "350",
+      ar: "350",
+      es: "350",
+      de: "350",
+      it: "350"
     },
     prices: {
-      fr: "3 000 000 DH",
-      en: "3,000,000 DH",
-      ar: "3,000,000 درهم",
-      es: "3.000.000 DH",
-      de: "3.000.000 DH",
-      it: "3.000.000 DH"
+      fr: "3 000 000",
+      en: "3,000,000",
+      ar: "3,000,000",
+      es: "3.000.000",
+      de: "3.000.000",
+      it: "3.000.000"
     }
   },
   {
@@ -116,20 +124,20 @@ const properties = [
       it: "Garage spazioso con sistema di sicurezza."
     },
     areas: {
-      fr: "50 m²",
-      en: "50 sqm",
-      ar: "50 متر مربع",
-      es: "50 m²",
-      de: "50 m²",
-      it: "50 m²"
+      fr: "350",
+      en: "350",
+      ar: "350",
+      es: "350",
+      de: "350",
+      it: "350"
     },
     prices: {
-      fr: "500 000 DH",
-      en: "500,000 DH",
-      ar: "500,000 درهم",
-      es: "500.000 DH",
-      de: "500.000 DH",
-      it: "500.000 DH"
+      fr: "3 000 000",
+      en: "3,000,000",
+      ar: "3,000,000",
+      es: "3.000.000",
+      de: "3.000.000",
+      it: "3.000.000"
     }
   },
   {
@@ -160,20 +168,20 @@ const properties = [
       it: "Terreno ideale per l'agricoltura, ben irrigato."
     },
     areas: {
-      fr: "1000 m²",
-      en: "1000 sqm",
-      ar: "1000 متر مربع",
-      es: "1000 m²",
-      de: "1000 m²",
-      it: "1000 m²"
+      fr: "350",
+      en: "350",
+      ar: "350",
+      es: "350",
+      de: "350",
+      it: "350"
     },
     prices: {
-      fr: "800 000 DH",
-      en: "800,000 DH",
-      ar: "800,000 درهم",
-      es: "800.000 DH",
-      de: "800.000 DH",
-      it: "800.000 DH"
+      fr: "3 000 000",
+      en: "3,000,000",
+      ar: "3,000,000",
+      es: "3.000.000",
+      de: "3.000.000",
+      it: "3.000.000"
     }
   },
   {
@@ -205,20 +213,20 @@ const properties = [
       it: "Terreno pianeggiante pronto per costruzione residenziale."
     },
     areas: {
-      fr: "750 m²",
-      en: "750 sqm",
-      ar: "750 متر مربع",
-      es: "750 m²",
-      de: "750 m²",
-      it: "750 m²"
+      fr: "350",
+      en: "350",
+      ar: "350",
+      es: "350",
+      de: "350",
+      it: "350"
     },
     prices: {
-      fr: "1 200 000 DH",
-      en: "1,200,000 DH",
-      ar: "1,200,000 درهم",
-      es: "1.200.000 DH",
-      de: "1.200.000 DH",
-      it: "1.200.000 DH"
+      fr: "3 000 000",
+      en: "3,000,000",
+      ar: "3,000,000",
+      es: "3.000.000",
+      de: "3.000.000",
+      it: "3.000.000"
     }
   },
   {
@@ -250,20 +258,20 @@ const properties = [
       it: "Terreno situato in una zona commerciale dinamica."
     },
     areas: {
-      fr: "500 m²",
-      en: "500 sqm",
-      ar: "500 متر مربع",
-      es: "500 m²",
-      de: "500 m²",
-      it: "500 m²"
+      fr: "350",
+      en: "350",
+      ar: "350",
+      es: "350",
+      de: "350",
+      it: "350"
     },
     prices: {
-      fr: "2 000 000 DH",
-      en: "2,000,000 DH",
-      ar: "2,000,000 درهم",
-      es: "2.000.000 DH",
-      de: "2.000.000 DH",
-      it: "2.000.000 DH"
+      fr: "3 000 000",
+      en: "3,000,000",
+      ar: "3,000,000",
+      es: "3.000.000",
+      de: "3.000.000",
+      it: "3.000.000"
     }
   }
 ];
