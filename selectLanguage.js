@@ -1,3 +1,4 @@
+// ===== selection de la langue ===================
 function selectLanguage() {
   const lang = document.getElementById("language").value;
   if (!lang) return;
