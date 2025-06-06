@@ -9,7 +9,9 @@ function fixArabicOrder(phrase) {
   if (!phrase || typeof phrase !== "string") return phrase;
 
   // Supprime la ponctuation temporairement, puis la réinsère à la fin
-  const punctuation = phrase.match(/[.?!،؛]$/);
+  //const punctuation = phrase.match(/[.?!،؛]$/);
+  const punctuation = phrase.match(/[\.\?!،؛؟]+$/); // inclut "؟"
+
   const cleanPhrase = phrase.replace(/[.?!،؛]$/, "").trim();
 
   const words = cleanPhrase.split(/\s+/).reverse();
