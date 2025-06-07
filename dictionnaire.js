@@ -325,7 +325,8 @@ const translations = {
  "11. Monaie : en Dirhams Marocain (DH).\n" +      
  "12. Vous recevrez une confirmation par email avec les détails.\n" +      
  "13. Envoyer votre proposition par email/whatsup.\n" +
-      "Merci de votre confiance.",
+      "", +
+      " 🤝 Merci de votre confiance 🤝",
     summaryTitle: "Résumé des choix",
     nameLabel: "Nom :",
     phoneLabel: "Téléphone :",
