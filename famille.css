@@ -181,3 +181,26 @@ th {
 .rtl-table th, .rtl-table td {
   text-align: right;
 }
+
+
+
+/* Pour l'élément d'affichage du commentaire */
+#commentsLabel {
+  font-size: 14px;
+  font-weight: bold;
+  color: #34495E;
+  margin-top: 10px;
+  border-left: 4px solid #2980B9;
+  padding-left: 8px;
+  line-height: 1.5;
+}
+
+/* Pour le titre de la procédure d'achat */
+.purchaseProcedureTitle {
+  font-size: 15px;
+  font-weight: bold;
+  font-style: italic;
+  color: #1A5276;
+  margin-top: 20px;
+  text-decoration: underline;
+}
