@@ -1,4 +1,3 @@
-
 function generatePropertyTable() {
   const t = translations[currentLanguage];
   const tbody = document.getElementById("property-body");
