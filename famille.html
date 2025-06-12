@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vente de Biens</title>
+  <!--  -->
+  <link rel="stylesheet" href="https://rayane-droid.github.io/HB25-2/famille.css" />
+  <link rel="stylesheet" href="https://rayane-droid.github.io/HB25-2/famillear.css" />
+  <!--  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+  <!--  -->
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/Rayane-Droid/HB25-3/refs/heads/main/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/Rayane-Droid/HB25-3/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Rayane-Droid/HB25-3/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/Rayane-Droid/HB25-3/favicon-16x16.png">
+  <!--  -->
+</head>
+
+<body>
+  
+  <div dir="rtl" lang="ar">...</div>
+
+  <div id="language-selection">
+    <h2 id="language-prompt">
+      <img src="https://rayane-droid.github.io/HB25-3/Drapeau-maroc.png" alt="MA" style="width: 20px; vertical-align: middle;" /> اختر لغتك <br />
+      <img src="https://rayane-droid.github.io/HB25-3/Drapeau-france.png" alt="FR" style="width: 20px; vertical-align: middle;" /> Choisissez votre langue <br />
+      <img src="https://rayane-droid.github.io/HB25-3/Drapeau-anglais.png" alt="EN" style="width: 20px; vertical-align: middle;" /> Choose your language <br />
+      <img src="https://rayane-droid.github.io/HB25-3/Drapeau-espagnol.png" alt="ES" style="width: 20px; vertical-align: middle;" /> Elija su idioma <br />
+      <img src="https://rayane-droid.github.io/HB25-3/Drapeau-allemagne.png" alt="DE" style="width: 20px; vertical-align: middle;" /> Wählen Sie Ihre Sprache <br />
+      <img src="https://rayane-droid.github.io/HB25-3/Drapeau-italie.png" alt="IT" style="width: 20px; vertical-align: middle;" /> Scegli la tua lingua
+    </h2>
+
+    <div class="language-menu">
+      <select id="language" onchange="selectLanguage()">
+        <option value="">--</option>
+        <option value="fr">Français</option>
+        <option value="ar">العربية</option>
+        <option value="en">Anglais</option>
+        <option value="es">Espagnol</option>
+        <option value="de">Allemand</option>
+        <option value="it">Italien</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="user-form" class="hidden" aria-live="polite" aria-label="Formulaire utilisateur">
+    <h2 id="welcome-message">Bienvenue !</h2>
+    <div class="input-block">
+      <label id="label-username" for="username">Nom d'utilisateur :</label>
+      <input type="text" id="username" aria-required="true" />
+    </div>
+    <div class="input-block">
+      <label id="label-phone" for="phone">Numéro de téléphone :</label>
+      <input type="text" id="phone" aria-required="true" />
+    </div>
+    <button class="btn" id="btn-continue" onclick="submitUserInfo()">Continuer</button>
+  </div>
+
+  <div id="content" class="hidden" aria-live="polite" aria-label="Liste des biens disponibles">
+    <button class="btn" onclick="resetApp()" id="btn-back">Retour au menu des langues</button>
+    <h2 id="property-title">Nos biens disponibles :</h2>
+    <table id="property-table" role="table" aria-describedby="property-title">
+      <!--   -->
+      <thead>
+        <tr>
+          <th>N°</th> <!-- cells[0] -->
+          <th>Bien</th> <!-- cells[1] -->
+          <th>Superficie</th> <!-- cells[2] -->
+          <th>Prix</th> <!-- cells[3] -->
+          <th>Valider</th> <!-- cells[4] -->
+          <th>Proposition</th> <!-- cells[5] -->
+          <th>Annuler</th> <!-- cells[6] -->
+        </tr>
+      </thead>
+      <tbody id="property-body"></tbody>
+    </table>
+
+    <!-- Champ de commentaire -->
+    <div class="input-block">
+      <label id="commentsLabel" for="comments">Commentaires :</label>
+      <textarea id="comments" rows="4" cols="50" placeholder="Laissez vos commentaires ici..."></textarea>
+    </div>
+    <br />
+    <button class="btn" onclick="saveToPDF()" id="btn-save">Enregistrer en PDF</button>
+  </div>
+
+  <!-- <script> </script> -->
+  <script src="https://rayane-droid.github.io/HB25-2/dictionnaire.js"></script>
+  <script src="https://rayane-droid.github.io/HB25-2/scriptAr.js"></script>
+  <script src="https://rayane-droid.github.io/HB25-2/Amiri-fonts.js"></script>
+  <script src="https://rayane-droid.github.io/HB25-2/script.js"></script>
+  <!--  -->
+  <script src="https://rayane-droid.github.io/HB25-2/generatePropertyTable.js"></script>
+  <script src="https://rayane-droid.github.io/HB25-2/saveToPDF.js"></script>
+  <script src="https://rayane-droid.github.io/HB25-2/resetApp.js"></script>
+  <script src="https://rayane-droid.github.io/HB25-2/selectLanguage.js"></script>
+  <script src="https://rayane-droid.github.io/HB25-2/submitUserInfo.js"></script>
+  <script src="https://rayane-droid.github.io/HB25-2/updateCommentsSection.js"></script>
+</body>
+
+</html>
